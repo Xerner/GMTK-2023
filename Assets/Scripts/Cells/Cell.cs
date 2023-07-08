@@ -15,17 +15,19 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         protected Rigidbody2D _rigidbody;
 
-        public float Speed = 1f;
+        public float Speed = 25;
         protected float ShootInterval = 0.3f;
         private float _lastShootTime = 0;
 
-        void Start()
+        void Awake()
         {
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
+
+            _rigidbody.drag = 7f;
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (ControllingPlayer == null)
             {
@@ -45,15 +47,15 @@ namespace Assets.Scripts.Cells
             return angle;
         }
 
-        public void Move(Vector2 direction)
+        public void Move(Vector2 moveVector)
         {
             // Speed check to prevent cell from moving faster than intented
             // if (direction.magnitude > 1)
             // {
             //     direction.Normalize();
             // }
-            var movementDelta = direction * Speed;
-            _rigidbody.velocity = movementDelta;
+            var movementDelta = moveVector * Speed;
+            _rigidbody.AddForce(movementDelta);
         }
 
         public void Shoot()
@@ -65,15 +67,15 @@ namespace Assets.Scripts.Cells
         {
             var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
-            // Maintain distance of 5-10 units from player
+            // Maintain a min/max distance threshold from player
             var delta = playerLoc - transform.position;
-            if (delta.magnitude > 10)
+            if (delta.magnitude > 8)
             {
-                Move(delta);
+                Move(delta.normalized);
             }
-            else if (delta.magnitude < 5)
+            else if (delta.magnitude < 4)
             {
-                Move(-delta);
+                Move(-delta.normalized);
             }
             else
             {
