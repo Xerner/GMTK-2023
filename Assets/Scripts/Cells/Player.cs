@@ -68,6 +68,14 @@ public class Player : MonoBehaviour
         // Currently empty, instead we're accessing mouse position directly inside FixedUpdate
     }
 
+    public void AcceptDash(CallbackContext context)
+    {
+        if (context.started)
+        {
+            _controlledCell.Dash();
+        }
+    }
+
     void FixedUpdate()
     {
         // TODO: feed controls to _controlledCell

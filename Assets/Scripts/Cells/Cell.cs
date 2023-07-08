@@ -16,6 +16,8 @@ namespace Assets.Scripts.Cells
         protected Rigidbody2D _rigidbody;
 
         public float Speed = 3f;
+        public float DashSpeedIncrease = 3f;
+        public float DashSpeedTime = 1f;
         protected float ShootInterval = 0.3f;
         private float _lastShootTime = 0;
 
@@ -37,7 +39,7 @@ namespace Assets.Scripts.Cells
 
         public void Dash()
         {
-            throw new System.NotImplementedException();
+            LeanTween.value(gameObject, (value) => Speed = value, Speed, Speed + DashSpeedIncrease, 1f);
         }
 
         public float FaceToward(Vector2 pointToFace)
