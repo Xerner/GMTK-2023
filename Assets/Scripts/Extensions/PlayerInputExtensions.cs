@@ -33,7 +33,7 @@ public static class PlayerInputExtensions
             return null;
         var event_ = playerInput.actionEvents.FirstOrDefault((actionEvent) => actionEvent.actionId == action.id.ToString());
         if (event_ == null)
-            Debug.LogError($"PlayerInput does not contain the action {action.name}", gameObject);
+            Debug.LogError($"PlayerInput does not contain the action {action.actionMap.name}/{action.name}", gameObject);
 
         return event_;
     }
