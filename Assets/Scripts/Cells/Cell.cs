@@ -19,13 +19,15 @@ namespace Assets.Scripts.Cells
         protected float ShootInterval = 0.3f;
         private float _lastShootTime = 0;
 
-        void Start()
+        void Awake()
         {
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
+
+            _rigidbody.drag = 7f;
         }
 
-        void Update()
+        void FixedUpdate()
         {
             if (ControllingPlayer == null)
             {
@@ -45,35 +47,35 @@ namespace Assets.Scripts.Cells
             return angle;
         }
 
-        public void Move(Vector2 direction)
+        public void Move(Vector2 moveVector)
         {
             // Speed check to prevent cell from moving faster than intented
-            if (direction.magnitude > 1)
-            {
-                direction.Normalize();
-            }
-            var movementDelta = direction * Speed;
-            _rigidbody.velocity = movementDelta;
+            // if (direction.magnitude > 1)
+            // {
+            //     direction.Normalize();
+            // }
+            var movementDelta = moveVector * Speed;
+            _rigidbody.AddForce(movementDelta);
         }
 
         public void Shoot()
         {
-            _attack?.UseAttack(transform.forward);
+            _attack?.UseAttack((Vector2)transform.up);
         }
 
         public void EnemyUpdate()
         {
             var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
-            // Maintain distance of 5-10 units from player
+            // Maintain a min/max distance threshold from player
             var delta = playerLoc - transform.position;
             if (delta.magnitude > 8)
             {
-                Move(delta);
+                Move(delta.normalized);
             }
-            else if (delta.magnitude < 5)
+            else if (delta.magnitude < 4)
             {
-                Move(-delta);
+                Move(-delta.normalized);
             }
             else
             {
