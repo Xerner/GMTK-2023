@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Extensions;
-using System;
+﻿using System;
 using System.Collections;
+using Assets.Scripts.Extensions;
 using UnityEngine;
 
 namespace Assets.Scripts.Cells
@@ -13,7 +13,7 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         private GameObject _projectilePrefab;
 
-        void Start ()
+        void Start()
         {
             this.EnsureHasReference(ref _projectilePrefab);
         }
