@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Assets.Scripts.Cells;
 using Assets.Scripts.Extensions;
@@ -8,17 +9,29 @@ using static UnityEngine.InputSystem.InputAction;
 public class Player : MonoBehaviour
 {
     static public Player Instance;
+
     private Cell _controlledCell;
 
     [SerializeField]
     private Cell _playerCell;
+
+    public Cell ControlledCell { get; private set; }
+    public Action<Cell> OnCellSwap;  
 
     public Vector3 GetPosition() => _controlledCell.transform.position;
 
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+            return;
+        }
     }
 
     // Start is called before the first frame update
@@ -41,9 +54,9 @@ public class Player : MonoBehaviour
         // TODO: call disable action on cell
         // For player cell this should disable
         // For non player cell destroy?
-
         _controlledCell = _playerCell;
         _controlledCell.ControllingPlayer = this;
+        OnCellSwap?.Invoke(_controlledCell);
     }
 
     public void AcceptMovement(CallbackContext context)

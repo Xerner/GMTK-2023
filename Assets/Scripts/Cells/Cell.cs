@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Assets.Scripts.Extensions;
 using UnityEngine;
 
@@ -15,9 +16,16 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         protected Rigidbody2D _rigidbody;
 
+        [SerializeField] float _health = 100f;
+        float _currentHealth = 100f;
+        public Action<float, float> OnHealthChange;
+
         public float Speed = 3f;
-        public float DashSpeedIncrease = 3f;
+        public float DashForce = 1000f;
         public float DashSpeedTime = 1f;
+        [SerializeField] float _dashCooldown = 2f;
+        float _currentDashCooldown = 0f;
+        public Action<float, float> OnDashCooldownChange;
         protected float ShootInterval = 0.3f;
         private float _lastShootTime = 0;
 
@@ -25,7 +33,7 @@ namespace Assets.Scripts.Cells
         {
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
-
+            SetHealth(_health);
             _rigidbody.drag = 7f;
         }
 
@@ -35,11 +43,28 @@ namespace Assets.Scripts.Cells
             {
                 EnemyUpdate();
             }
+            _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
+            OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
+        }
+
+        public void SetHealth(float newHealth, float? totalHealth = null)
+        {
+            if (totalHealth != null)
+                _health = totalHealth.Value;
+
+            _currentHealth = newHealth;
+            OnHealthChange?.Invoke(_health, _currentHealth);
         }
 
         public void Dash()
         {
-            LeanTween.value(gameObject, (value) => Speed = value, Speed, Speed + DashSpeedIncrease, 1f);
+            if (_currentDashCooldown <= 0f)
+            {
+                _currentDashCooldown = _dashCooldown;
+                Vector2 dashForce = transform.up * DashForce;
+                Debug.Log(dashForce);
+                _rigidbody.AddForce(dashForce);
+            }
         }
 
         public float FaceToward(Vector2 pointToFace)
