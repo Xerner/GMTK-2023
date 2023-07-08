@@ -12,10 +12,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Cell _playerCell;
 
+    public Vector3 GetPosition() => _controlledCell.transform.position;
+
     void Awake()
     {
         Instance = this;
-        _playerCell.Speed = 4f;
+        _playerCell.Speed = 6f;
     }
 
     // Start is called before the first frame update

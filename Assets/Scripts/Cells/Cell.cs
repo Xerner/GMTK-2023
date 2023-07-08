@@ -63,7 +63,7 @@ namespace Assets.Scripts.Cells
 
         public void EnemyUpdate()
         {
-            var playerLoc = Player.Instance.transform.position;
+            var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
             // Maintain distance of 5-10 units from player
             var delta = playerLoc - transform.position;
