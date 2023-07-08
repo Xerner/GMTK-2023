@@ -7,6 +7,7 @@ public class SceneTransition : MonoBehaviour
 
     public void GoToScene()
     {
+        Debug.Log($"Transitioning to {SceneName}");
         SceneManager.LoadSceneAsync(SceneName);
     }
 }
