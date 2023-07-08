@@ -58,7 +58,7 @@ namespace Assets.Scripts.Cells
 
         public void Shoot()
         {
-            _attack?.UseAttack(transform.forward);
+            _attack?.UseAttack((Vector2)transform.up);
         }
 
         public void EnemyUpdate()
