@@ -15,7 +15,7 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         protected Rigidbody2D _rigidbody;
 
-        public float Speed = 1f;
+        public float Speed = 3f;
         protected float ShootInterval = 0.3f;
         private float _lastShootTime = 0;
 
@@ -48,10 +48,10 @@ namespace Assets.Scripts.Cells
         public void Move(Vector2 direction)
         {
             // Speed check to prevent cell from moving faster than intented
-            // if (direction.magnitude > 1)
-            // {
-            //     direction.Normalize();
-            // }
+            if (direction.magnitude > 1)
+            {
+                direction.Normalize();
+            }
             var movementDelta = direction * Speed;
             _rigidbody.velocity = movementDelta;
         }
@@ -67,7 +67,7 @@ namespace Assets.Scripts.Cells
             // Currently assumes player is ~1 unit in size
             // Maintain distance of 5-10 units from player
             var delta = playerLoc - transform.position;
-            if (delta.magnitude > 10)
+            if (delta.magnitude > 8)
             {
                 Move(delta);
             }

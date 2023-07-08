@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
     public void AcceptAttack(CallbackContext _) => _controlledCell.Shoot();
     public void AcceptPoint(CallbackContext context)
     {
-        // Currently empty, instead we're accessing mouse position directly
+        // Currently empty; instead we're accessing mouse position directly in Update()
     }
 
     void Update()
