@@ -186,6 +186,17 @@
                 },
                 {
                     "name": "",
+                    "id": "e076b65e-2e0e-4e1d-97a1-800e1ce5ef16",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Start",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "90a7e143-83b1-4721-babe-d9de8d7804fb",
                     "path": "<Keyboard>/g",
                     "interactions": "",

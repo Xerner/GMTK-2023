@@ -176,7 +176,7 @@ Transform:
   m_Children:
   - {fileID: 9120923739698710430}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2599373319797223141
 MonoBehaviour:
@@ -254,5 +254,34 @@ MonoBehaviour:
               m_IntArgument: 0
               m_FloatArgument: 0
               m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - InputActionReference: {fileID: 3306101175532458771, guid: fcd97719b04f16e41b4362eb47450bc9,
+        type: 3}
+      Callbacks:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: MenuBehaviour, Assembly-CSharp
+            m_MethodName: OpenMenu
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: UI
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 2057973098706683961}
+            m_TargetAssemblyTypeName: PlayerInputConsumer, Assembly-CSharp
+            m_MethodName: SwitchActionMap
+            m_Mode: 5
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: UI
               m_BoolArgument: 0
             m_CallState: 2
