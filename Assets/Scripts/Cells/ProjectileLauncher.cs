@@ -60,6 +60,9 @@ namespace Assets.Scripts.Cells
                 case AttackPattern.Parallel:
                     ShootParallel(normalizeDir, speedOffset);
                     break;
+                case AttackPattern.Ring:
+                    ShootRing();
+                    break;
             }
         }
 
@@ -108,6 +111,19 @@ namespace Assets.Scripts.Cells
             InitializeBullet(posDirection * shotSpawnRadius, normalizedDirection, speedOffset, overrideSpeed: 10f);
         }
 
+        private void ShootRing()
+        {
+            var shootVec = Vector2.up;
+            var rotation = Quaternion.AngleAxis(30, Vector3.forward);
+
+
+            for (var i = 0; i < 360; i += 30)
+            {
+                shootVec = rotation * shootVec;
+                InitializeBullet(shootVec * shotSpawnRadius, shootVec, 0, overrideSpeed: 2f, overrideLifetimer: 8f);
+            }
+        }
+
         private void InitializeBullet(Vector2 offset, Vector2 direction, float speedOffset, float? overrideSpeed = null, float? overrideLifetimer = null)
         {
             var bulletGO = Instantiate(_projectilePrefab, transform.position + (Vector3)offset, Quaternion.FromToRotation(Vector3.up, direction));
@@ -123,7 +139,8 @@ namespace Assets.Scripts.Cells
             Arc3,
             Arc5,
             Parallel,
-            Burst
+            Burst,
+            Ring
         }
     }
 }
