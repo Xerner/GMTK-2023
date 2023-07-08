@@ -1,5 +1,6 @@
 using Assets.Scripts.Cells;
 using Assets.Scripts.Extensions;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
     private Cell _playerCell;
 
     public Vector3 GetPosition() => _controlledCell.transform.position;
+
+
 
     void Awake()
     {
@@ -42,7 +45,18 @@ public class Player : MonoBehaviour
     }
 
     public void AcceptMovement(CallbackContext context) => _controlledCell?.Move(context.ReadValue<Vector2>());
-    public void AcceptAttack(CallbackContext _) => _controlledCell.Shoot();
+    public void AcceptAttack(CallbackContext context)
+    {
+        if (context.started)
+        {
+            shootOnDelayEnumerator = StartCoroutine(ShootOnDelay());
+        }
+        else if(context.canceled)
+        {
+            StopCoroutine(shootOnDelayEnumerator);
+        }
+    }
+
     public void AcceptPoint(CallbackContext context)
     {
         // Currently empty, instead we're accessing mouse position directly
@@ -56,4 +70,17 @@ public class Player : MonoBehaviour
 
         _controlledCell.FaceToward(mouseWorldPosition);
     }
+
+    private Coroutine shootOnDelayEnumerator;
+
+    IEnumerator ShootOnDelay()
+    {
+        while(true)
+        {
+            _controlledCell.Shoot();
+            yield return _shootDelay;
+        }
+    }
+
+    private static readonly WaitForSeconds _shootDelay = new(.25f);
 }
