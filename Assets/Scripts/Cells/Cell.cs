@@ -28,7 +28,9 @@ namespace Assets.Scripts.Cells
 
         public float FaceToward(Vector2 faceToward)
         {
-            throw new System.NotImplementedException();
+            // TODO: should make this so that depending on rotation speed this might not move to rotation instantly
+            _rigidbody.MoveRotation(Quaternion.LookRotation(faceToward, Vector3.up));
+            return 0;
         }
 
         public void Move(Vector2 moveToward)
