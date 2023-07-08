@@ -84,11 +84,11 @@ namespace Assets.Scripts.Cells
                 Move(Vector2.zero);
             }
 
-            // FaceToward(playerLoc);
+            FaceToward(playerLoc);
 
             if (Time.time - _lastShootTime > ShootInterval)
             {
-                // Shoot();
+                Shoot();
                 _lastShootTime = Time.time;
             }
         }
