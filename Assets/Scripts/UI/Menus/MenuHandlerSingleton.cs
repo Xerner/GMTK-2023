@@ -57,11 +57,23 @@ public class MenuHandlerSingleton : MonoBehaviour
             Menus[i].gameObject.SetActive(false);
     }
 
-    public void EnableActiveMenu() => activeMenu.gameObject.SetActive(true);
+    public void EnableActiveMenu()
+    {
+        if (activeMenu == null) return;
+        activeMenu.gameObject.SetActive(true);
+    }
 
-    public void DisableActiveMenu() => activeMenu.gameObject.SetActive(false);
+    public void DisableActiveMenu()
+    {
+        if (activeMenu == null) return;
+        activeMenu.gameObject.SetActive(false);
+    }
 
-    public void ChangeToPreviousMenu() => StartCoroutine(changeMenuCoroutine(previousMenu.MenuName, false));
+    public void ChangeToPreviousMenu()
+    {
+        if (previousMenu == null) return;
+        StartCoroutine(changeMenuCoroutine(previousMenu.MenuName, false));
+    }
 
     public void ChangeMenu(string menuName) => StartCoroutine(changeMenuCoroutine(menuName));
 

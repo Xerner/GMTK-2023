@@ -37,6 +37,7 @@ public class GlobalSettings : MonoBehaviour
 
     public void UpdateResolution(Resolution resolution, FullScreenMode fullScreenMode)
     {
-        Screen.SetResolution(resolution.width, resolution.height, fullScreenMode, resolution.refreshRateRatio);
+        Application.targetFrameRate = 60;
+        Screen.SetResolution(resolution.width, resolution.height, fullScreenMode);
     }
 }

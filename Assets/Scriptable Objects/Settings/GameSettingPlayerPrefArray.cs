@@ -3,7 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GameSettingPlayerPrefArray<T> : GameSetting<T>, IGameSettingArray<T> {
+    public int valueIndex = -1;
     public List<InputValue<T>> choices;
+
+    protected virtual void OnValidate()
+    {
+        if (valueIndex == -1)
+            valueIndex = GetIndex();
+
+        if (valueIndex == -1)
+            valueIndex = 0;
+
+        setter(valueIndex);
+        valueIndex = GetIndex();
+    }
 
     public virtual List<InputValue<T>> Choices => choices;
 
@@ -20,6 +33,16 @@ public abstract class GameSettingPlayerPrefArray<T> : GameSetting<T>, IGameSetti
     protected virtual void setter(T value) {
         int index = Choices.FindIndex((InputValue<T> value2) => Compare(value2.Value, value));
         if (index == -1) throw new InvalidValueGivenToSetter<T>(value, Choices);
+        setter(index);
+    }
+
+    protected virtual void setter(int index)
+    {
+        if (index < 0 || index >= Choices.Count)
+        {
+            Debug.LogWarning($"Index {index} is out of bounds", this);
+            return;
+        }
         PlayerPrefs.SetInt(Key, index);
     }
 

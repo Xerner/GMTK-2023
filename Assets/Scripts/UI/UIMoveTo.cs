@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EasyButtons;
 
 [AddComponentMenu("UI/Move To")]
 [RequireComponent(typeof(RectTransform))]
@@ -31,18 +32,42 @@ public class UIMoveTo : MonoBehaviour
 
     public void Move(Vector3 targetPosition) {
         if (LeanTween.isTweening(gameObject)) LeanTween.cancel(gameObject);
-        currentTween = LeanTween.move((RectTransform)transform, targetPosition, target.CurrentMoveToDuration);
-        if (!hasMoved) currentTween.setOnComplete(() => {
-            hasMoved = true;
-            target.CurrentMoveToDuration = target.MoveToDuration;
-        });
+        if (Application.isPlaying)
+        {
+            currentTween = LeanTween.move((RectTransform)transform, targetPosition, target.CurrentMoveToDuration);
+            if (!hasMoved) currentTween.setOnComplete(() => {
+                hasMoved = true;
+                target.CurrentMoveToDuration = target.MoveToDuration;
+            });
+        }
+        else
+        {
+            Debug.Log($"Moving to {targetPosition}");
+            Vector3 position = GetPosition(target.GameObject);
+            RectTransform rectTransform = (RectTransform)transform;
+            switch (target.TargetPositionType)
+            {
+                case EPosition.Global:
+                    rectTransform.position = position;
+                    break;
+                case EPosition.Local:
+                    rectTransform.localPosition = position;
+                    break;
+                case EPosition.Anchored:
+                    rectTransform.anchoredPosition = position;
+                    break;
+                default:
+                    rectTransform.position = position;
+                    break;
+            }
+        }
     }
 
     public Vector3 GetPosition(GameObject gameObject) {
         if (gameObject == null) return DefaultPosition;
         RectTransform rectTransform = (RectTransform)gameObject.transform;
         Vector3 targetPosition;
-        switch (target.PositionType) {
+        switch (target.TargetPositionType) {
             case EPosition.Global:
                 targetPosition = rectTransform.position;
                 break;
@@ -60,6 +85,7 @@ public class UIMoveTo : MonoBehaviour
         return targetPosition;
     }
 
+    [Button]
     public void Move() => Move(GetPosition(target.GameObject));
 
     public void ChangeDuration(float duration) {
@@ -90,10 +116,10 @@ public class UIMoveTo : MonoBehaviour
     [Serializable]
     public class MoveToTarget {
         public GameObject GameObject;
-        public EPosition PositionType = EPosition.Anchored;
-        [Description("Seconds")]
+        public EPosition TargetPositionType = EPosition.Anchored;
         public Vector2 Offset;
         public float MoveToDuration = 1f;
+        [Description("Seconds")]
         public float InitialMoveToDuration = 1f;
         [HideInInspector] public float CurrentMoveToDuration = 0f;
     }

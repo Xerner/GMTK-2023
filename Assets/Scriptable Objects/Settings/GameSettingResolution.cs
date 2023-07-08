@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "Resolution Setting", menuName = "Settings/Resolution")]
 public class GameSettingResolution : GameSettingPlayerPrefArray<Resolution> {
-    //public static List<Resolution> Resolutions = new() { 
-    //    new Resolution() { height }
-    //};
+    private Dictionary<string, Resolution> savedResolutions = new();
 
     public override List<InputValue<Resolution>> Choices {
         get {
@@ -14,8 +12,9 @@ public class GameSettingResolution : GameSettingPlayerPrefArray<Resolution> {
         }
     }
 
-    private void OnValidate() {
-        SyncChoicesToResolution();
+    protected override void OnValidate() {
+        base.OnValidate();
+        //SyncChoicesToResolution();
     }
 
     private void Awake() {
@@ -23,9 +22,19 @@ public class GameSettingResolution : GameSettingPlayerPrefArray<Resolution> {
     }
 
     protected void SyncChoicesToResolution() {
+
         choices.Clear();
+        savedResolutions.Clear();
+        // Get unique resolutions without considering refresh rate
         foreach (Resolution resolution in Screen.resolutions) {
-            choices.Add(new InputValue<Resolution>(resolution.ToString(), resolution));
+            string key = $"{resolution.width} x {resolution.height}";
+            if (!savedResolutions.ContainsKey(key))
+                savedResolutions.Add(key, resolution);
+        }
+        // Add unique resolutions to a List because its serializable and can be shown in editor
+        foreach (var pair in savedResolutions)
+        {
+            choices.Add(new InputValue<Resolution>(pair.Key, pair.Value));
         }
     }
 }

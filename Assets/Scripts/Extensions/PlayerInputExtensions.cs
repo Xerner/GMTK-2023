@@ -29,15 +29,12 @@ public static class PlayerInputExtensions
 
     public static UnityEvent<InputAction.CallbackContext> GetEvent(this PlayerInput playerInput, InputAction action, GameObject gameObject = null)
     {
-        try
-        {
-            var event_ = playerInput.actionEvents.First((actionEvent) => actionEvent.actionId == action.id.ToString());
-            return event_;
-        }
-        catch (InvalidOperationException)
-        {
+        if (action == null)
+            return null;
+        var event_ = playerInput.actionEvents.FirstOrDefault((actionEvent) => actionEvent.actionId == action.id.ToString());
+        if (event_ == null)
             Debug.LogError($"PlayerInput does not contain the action {action.name}", gameObject);
-        }
-        return null;
+
+        return event_;
     }
 }
