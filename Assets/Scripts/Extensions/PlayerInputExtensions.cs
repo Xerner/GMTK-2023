@@ -8,16 +8,35 @@ using UnityEngine.InputSystem;
 
 public static class PlayerInputExtensions
 {
-    public static UnityEvent<InputAction.CallbackContext> GetEvent(this PlayerInput playerInput, string actionMap, string action) {
-        var uiActionMap = playerInput.actions.FindActionMap(actionMap).FindAction(action);
-        if (uiActionMap == null)
-            Debug.LogError($"PlayerInput does not contain the action map {actionMap}");
+    public static InputAction GetAction(this PlayerInput playerInput, string actionMap, string action)
+    {
+        return playerInput.actions.FindActionMap(actionMap).FindAction(action);
+    }
 
-        try {
-            var event_ = playerInput.actionEvents.First((actionEvent) => actionEvent.actionId == uiActionMap.id.ToString());
+    public static UnityEvent<InputAction.CallbackContext> GetEvent(this PlayerInput playerInput, string actionMap, string action, GameObject gameObject = null) {
+        InputAction inputAction = playerInput.GetAction(actionMap, action);
+        if (inputAction == null)
+            Debug.LogError($"PlayerInput does not contain the action map {actionMap}", gameObject);
+
+        return playerInput.GetEvent(inputAction, gameObject);
+    }
+
+    public static UnityEvent<InputAction.CallbackContext> GetEvent(this PlayerInput playerInput, InputActionReference inputActionReference, GameObject gameObject = null)
+    {
+        InputAction action = inputActionReference.action;
+        return playerInput.GetEvent(action, gameObject);
+    }
+
+    public static UnityEvent<InputAction.CallbackContext> GetEvent(this PlayerInput playerInput, InputAction action, GameObject gameObject = null)
+    {
+        try
+        {
+            var event_ = playerInput.actionEvents.First((actionEvent) => actionEvent.actionId == action.id.ToString());
             return event_;
-        } catch (InvalidOperationException) {
-            Debug.LogError($"PlayerInput's {actionMap} does not contain the action {action}");
+        }
+        catch (InvalidOperationException)
+        {
+            Debug.LogError($"PlayerInput does not contain the action {action.name}", gameObject);
         }
         return null;
     }

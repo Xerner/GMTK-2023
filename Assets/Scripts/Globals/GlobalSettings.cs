@@ -2,36 +2,26 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(MenuHandler))]
-public class GlobalVariables : MonoBehaviour
+[RequireComponent(typeof(MenuHandlerSingleton))]
+// Just adding other components that need to exist globally as required components
+[RequireComponent(typeof(DialogBoxFactory))]
+public class GlobalSettings : MonoBehaviour
 {
     [SerializeField] GameSetting<FullScreenMode> fullscreenSetting;
     [SerializeField] GameSetting<Resolution> resolutionSetting;
     [SerializeField] GameSetting<float> sfxVolumeSetting;
     [SerializeField] GameSetting<float> musicVolumeSetting;
-    [SerializeField] GameSetting<Vector3> unitVectorSetting;
-    [SerializeField] DialogBoxFactory dialogBoxFactory;
-    [SerializeField] GameObject dialogBoxParent;
 
     public static GameSetting<float> SFXVolumeSetting;
     public static GameSetting<float> MusicVolumeSetting;
-    public static GameSetting<Vector3> UnitVectorSetting;
 
-    public static GlobalVariables Singleton;
+    public static GlobalSettings Singleton;
 
     void Awake() {
         fullscreenSetting.OnValueChange.AddListener(UpdateResolution);
         resolutionSetting.OnValueChange.AddListener(UpdateResolution);
         SFXVolumeSetting = sfxVolumeSetting;
         MusicVolumeSetting = musicVolumeSetting;
-        UnitVectorSetting = unitVectorSetting;
-
-        if (dialogBoxFactory == null) Debug.LogError("No DialogBoxFactory provided", gameObject);
-        else {
-            DialogBoxFactory.InitializeQuickBoxes(dialogBoxFactory.DialogBoxes);
-            if (dialogBoxParent == null) Debug.LogError("No DialogBox Parent GameObject provided", gameObject);
-            DialogBoxFactory.DialogBoxesParent = dialogBoxParent;
-        } 
 
         if (Singleton == null) {
             Singleton = this;

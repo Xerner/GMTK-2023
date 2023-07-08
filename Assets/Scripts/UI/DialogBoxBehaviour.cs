@@ -8,7 +8,7 @@ using static UnityEngine.InputSystem.InputAction;
 [AddComponentMenu("Dialogue Box")]
 [RequireComponent(typeof(PlayerInputConsumer))]
 [RequireComponent(typeof(Image))]
-public class DialogBoxBehaviour : MonoBehaviour, IUseADialogBox {
+public class DialogBoxBehaviour : MonoBehaviour, IDialogBox {
 
     #region Variables
 

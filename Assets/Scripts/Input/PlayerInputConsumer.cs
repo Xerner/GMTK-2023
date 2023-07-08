@@ -42,7 +42,7 @@ public class PlayerInputEvents {
         if (!hasSubscribed || playerInput == null || !Application.isPlaying) return;
 
         foreach (PlayerInputEvent inputEvent in Events) {
-            UnityEvent<InputAction.CallbackContext> event_ = playerInput.GetEvent(inputEvent.ActionMap, inputEvent.Action);
+            UnityEvent<InputAction.CallbackContext> event_ = playerInput.GetEvent(inputEvent.Action);
             if (event_ != null)
                 event_.RemoveListener(inputEvent.Callbacks.Invoke);
         }
@@ -53,7 +53,7 @@ public class PlayerInputEvents {
         playerInput = GetPlayerInput(gameObject);
         
         foreach (PlayerInputEvent inputEvent in Events) {
-            UnityEvent<InputAction.CallbackContext> event_ = playerInput.GetEvent(inputEvent.ActionMap, inputEvent.Action);
+            UnityEvent<InputAction.CallbackContext> event_ = playerInput.GetEvent(inputEvent.Action, gameObject);
             if (event_ != null) event_.AddListener(inputEvent.Callbacks.Invoke);
         }
         hasSubscribed = true;
@@ -100,13 +100,26 @@ public class PlayerInputEvents {
 
 [Serializable]
 public class PlayerInputEvent {
-    public string ActionMap;
-    public string Action;
+    public InputActionReference InputActionReference;
     public UnityEvent<InputAction.CallbackContext> Callbacks;
+    InputAction action = null;
 
-    public PlayerInputEvent(string actionMap, string action) {
-        Action = action;
-        ActionMap = actionMap;
+    public InputAction Action { get {
+            if (InputActionReference == null)
+                return action;
+            
+            return InputActionReference.action;
+        }
+    }
+
+    public PlayerInputEvent(InputActionReference inputActionReference) {
+        InputActionReference = inputActionReference;
+        Callbacks = new();
+    }
+
+    public PlayerInputEvent(string actionMap, string action, PlayerInput playerInput)
+    {
+        this.action = playerInput.GetAction(actionMap, action);
         Callbacks = new();
     }
 }

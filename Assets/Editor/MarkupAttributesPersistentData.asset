@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254c8b402f09e8a4aa87f7c8aaa534b3, type: 3}
-  m_Name: Battle Scene On-Off
+  m_Script: {fileID: 11500000, guid: da0d25574c33ac64d98db1c615ce7ff9, type: 3}
+  m_Name: MarkupAttributesPersistentData
   m_EditorClassIdentifier: 
-  Key: Battle Scene On-Off
-  defaultValue: 0
-  OnValueChange:
-    m_PersistentCalls:
-      m_Calls: []
+  serializedBoolEntries:
+  - key: DialogBoxBehaviour/Dialog Box Components
+    value: 0
+  serializedIntEntries: []

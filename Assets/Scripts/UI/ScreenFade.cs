@@ -59,28 +59,6 @@ public class ScreenFade : MonoBehaviour
         yield return new WaitForSeconds(time);
     }
 
-    public IEnumerator FadeCutout(bool fadeIn, float speed, Sprite cutout)
-    {
-        if (cutout == null)
-            cutout = fadeCutouts[Random.Range(0, fadeCutouts.Length)];
-
-        image.sprite = cutout;
-        image.material = fadeMaterial;
-
-        float increment = 0f;
-        while (increment < 1)
-        {
-            increment += (1 / speed) * Time.deltaTime;
-            if (increment > 1)
-                increment = 1;
-
-            float alpha = (!fadeIn) ? 1f - increment : increment;
-
-            image.material.SetFloat("_Cutoff", alpha);
-            yield return null;
-        }
-    }
-
     /// <summary>Fade the screen to darkness</summary>
     public void SetToFadedOut()
     {

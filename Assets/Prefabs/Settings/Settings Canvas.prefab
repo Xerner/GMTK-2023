@@ -815,7 +815,7 @@ GameObject:
   - component: {fileID: 3886436778770744849}
   - component: {fileID: 900632917088796452}
   m_Layer: 0
-  m_Name: Pokemon DP Text Base
+  m_Name: Text Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 2629708750542810481}
   - component: {fileID: 7562856118821745778}
   m_Layer: 0
-  m_Name: Pokemon DP Text Base
+  m_Name: Text Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1310,7 +1310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -65}
+  m_AnchoredPosition: {x: 0, y: -65}
   m_SizeDelta: {x: -673.7531, y: 133}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1695057627905065761
@@ -1948,7 +1948,7 @@ GameObject:
   - component: {fileID: 6176654556863804198}
   - component: {fileID: 7244756679500123340}
   m_Layer: 0
-  m_Name: Settings
+  m_Name: Settings Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1971,7 +1971,7 @@ RectTransform:
   - {fileID: 1695057627905065763}
   - {fileID: 2885592311553039787}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2238,7 +2238,7 @@ GameObject:
   - component: {fileID: 4623392129358543167}
   - component: {fileID: 5877458534153310561}
   m_Layer: 0
-  m_Name: Pokemon DP Text Base
+  m_Name: Text Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279242768
+    rgba: 4280427263
   m_fontColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 255}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3056,7 +3056,7 @@ GameObject:
   - component: {fileID: 4869161266293243692}
   - component: {fileID: 2046980543834032468}
   m_Layer: 0
-  m_Name: Pokemon DP Text Base
+  m_Name: Text Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3522,6 +3522,11 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2684745660081493256, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     - target: {fileID: 3212882758483489816, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
         type: 3}
       propertyPath: m_Name
@@ -3984,6 +3989,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UIInputBehaviour`1[[UnityEngine.Resolution, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7950181895499175903, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4650693747317973101, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b, type: 3}
     m_RemovedGameObjects: []
@@ -4293,6 +4303,11 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2684745660081493256, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     - target: {fileID: 3212882758483489816, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
         type: 3}
       propertyPath: m_Name
@@ -4510,6 +4525,11 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2684745660081493256, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     - target: {fileID: 3212882758483489816, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
         type: 3}
       propertyPath: m_Name
@@ -4582,6 +4602,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5331c92cfbaa3be42b7aab866a5fe315,
         type: 2}
+    - target: {fileID: 1984534651497190528, guid: 4244addd8d0092544997db2791e6ae70,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     - target: {fileID: 3407445639540448659, guid: 4244addd8d0092544997db2791e6ae70,
         type: 3}
       propertyPath: m_fontAsset
@@ -5766,6 +5791,11 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2684745660081493256, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     - target: {fileID: 3212882758483489816, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
         type: 3}
       propertyPath: m_Name
@@ -6314,6 +6344,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Carousel`1[[UnityEngine.FullScreenMode, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7950181895499175903, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4650693747317973101, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b, type: 3}
     m_RemovedGameObjects: []
@@ -6597,6 +6632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2684745660081493256, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
+        type: 3}
+      propertyPath: m_Name
+      value: Text Base
       objectReference: {fileID: 0}
     - target: {fileID: 3212882758483489816, guid: d0478fb11d7133e4fa7dcc6a4a8d00ce,
         type: 3}

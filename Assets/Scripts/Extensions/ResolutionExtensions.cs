@@ -5,6 +5,6 @@ using UnityEngine;
 public static class ResolutionExtensions
 {
     public static string GetDisplayText(this Resolution resolution) {
-        return $"{resolution.width} x {resolution.height} {resolution.refreshRate}Hz";
+        return $"{resolution.width} x {resolution.height} {resolution.refreshRateRatio}Hz";
     }
 }

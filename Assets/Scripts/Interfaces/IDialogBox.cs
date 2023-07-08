@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>Intended for us on a Prefab with a DialogueBoxBehaviour on its parent component</summary>
-public interface IUseADialogBox {
+public interface IDialogBox {
     public Image Image { get; }
     public GameSetting<Sprite> FrameSetting { get; }
     public TMPro.TextMeshProUGUI Text { get; }

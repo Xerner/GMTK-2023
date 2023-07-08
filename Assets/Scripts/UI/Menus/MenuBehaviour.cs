@@ -5,20 +5,27 @@ using UnityEngine.UI;
 public class MenuBehaviour : MonoBehaviour
 {
     [SerializeField] string menuName = "A menu";
+    [Description("Menu's that are not first will be deactivated")]
     public bool isFirstMenu = false;
     Canvas canvas;
 
     public string MenuName { get => menuName; }
 
-    protected void Start() {
-        MenuHandler.Singleton.Menus.Add(this);
-        if (isFirstMenu) MenuHandler.Singleton.ChangeMenuInstantly(menuName);
+    void Awake()
+    {
         canvas = GetComponent<Canvas>();
-        if (!isFirstMenu) gameObject.SetActive(false);
+    }
+
+    protected void Start() {
+        MenuHandlerSingleton.Singleton.Menus.Add(this);
+        if (isFirstMenu) 
+            MenuHandlerSingleton.Singleton.ChangeMenuInstantly(menuName);
+        else 
+            gameObject.SetActive(false);
     }
 
     protected void OnDestroy() {
-        MenuHandler.Singleton.Menus.Remove(this);
+        MenuHandlerSingleton.Singleton.Menus.Remove(this);
     }
 
     public virtual Selectable GetFirstSelectable() {
@@ -46,5 +53,5 @@ public class MenuBehaviour : MonoBehaviour
         }
     }
 
-    public void ChangeMenu(string name) => MenuHandler.Singleton.ChangeMenu(name);
+    public void ChangeMenu(string name) => MenuHandlerSingleton.Singleton.ChangeMenu(name);
 }

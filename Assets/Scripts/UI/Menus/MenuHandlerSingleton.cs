@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 
 [AddComponentMenu("UI/Menus/Menu Handler", order: 0)]
 [RequireComponent(typeof(PlayerInput))]
-public class MenuHandler : MonoBehaviour
+public class MenuHandlerSingleton : MonoBehaviour
 {
-    public static MenuHandler Singleton;
+    public static MenuHandlerSingleton Singleton;
     public List<MenuBehaviour> Menus;
     MenuBehaviour activeMenu;
     MenuBehaviour previousMenu;

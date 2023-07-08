@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "New Dialog Boxes Factory", menuName = "UI/Dialog Box Factory")]
-public class DialogBoxFactory : ScriptableObject {
+public class DialogBoxFactory : MonoBehaviour {
     //public static DialogBox Singleton;
 
     /// <summary>Access this list for easy access to available Dialog Boxes to Spawn</summary>
-    [Description("This ScriptableObject needs to be attached to GlobalVariables for it to load the available boxes")]
+    public static DialogBoxFactory Singleton;
     public List<DialogBox> DialogBoxes;
-    public static GameObject DialogBoxesParent;
+    public static GameObject DialogBoxParent;
+    [SerializeField] GameObject dialogBoxParent;
     public static Dictionary<string, DialogBox> QuickBoxes = new();
     static Dictionary<DialogBox, DialogBoxBehaviour> pool = new();
 
@@ -19,6 +19,23 @@ public class DialogBoxFactory : ScriptableObject {
         QuickBoxes.Clear();
         foreach (DialogBox dialogBox in dialogBoxes) {
             QuickBoxes.Add(dialogBox.Name, dialogBox);
+        }
+    }
+
+    void Awake()
+    {
+        InitializeQuickBoxes(DialogBoxes);
+        if (dialogBoxParent == null) Debug.LogError("No DialogBox Parent GameObject provided", gameObject);
+        DialogBoxParent = dialogBoxParent;
+
+        if (Singleton == null)
+        {
+            Singleton = this;
+        }
+        else if (Singleton != this)
+        {
+            Destroy(gameObject);
+            return;
         }
     }
 
@@ -59,7 +76,7 @@ public class DialogBoxFactory : ScriptableObject {
         dialogBoxObject.Initialize(dialogBox);
         Vector2 offsetMax = rectTransform.offsetMax;
         Vector2 offsetMin = rectTransform.offsetMin;
-        rectTransform.SetParent(DialogBoxesParent.transform);
+        rectTransform.SetParent(DialogBoxParent.transform);
         rectTransform.offsetMax = offsetMax;
         rectTransform.offsetMin = offsetMin;
         rectTransform.localScale = Vector3.one;

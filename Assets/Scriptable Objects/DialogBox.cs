@@ -18,9 +18,6 @@ public class DialogBox : ScriptableObject {
     public Sprite Frame;
     [ShowIf("useSettingFrame")]
     public GameSetting<Sprite> FrameSetting;
-    [Description("The spawned dialog box will prioritize using Frame Setting over Frame")]
-    [SerializeField]
-    bool useSettingFrame = false;
     [EndGroup]
     [Space]
 

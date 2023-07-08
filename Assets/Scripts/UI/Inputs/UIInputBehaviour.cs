@@ -40,7 +40,7 @@ public abstract class UIInputBehaviour<T> : UIInputBehaviour {
 
     void SubscribeToPlayerInputEvents() {
         if (PlayerInputSingleton.Singleton == null) return;
-        PlayerInputEvent event_ = new PlayerInputEvent("UI", "Navigate");
+        PlayerInputEvent event_ = new PlayerInputEvent("UI", "Navigate", Input.PlayerInput);
         event_.Callbacks.AddListener(Navigate);
         Input.Events.Add(event_);
         Input.Subscribe(gameObject);
@@ -124,7 +124,7 @@ public class UIInputBehaviour : Selectable {
 
         public void AdjustVolume() {
             SelectAudioSource.volume = originalVolume;
-            SelectAudioSource.volume *= GlobalVariables.SFXVolumeSetting.Get();
+            SelectAudioSource.volume *= GlobalSettings.SFXVolumeSetting.Get();
         }
     }
 
