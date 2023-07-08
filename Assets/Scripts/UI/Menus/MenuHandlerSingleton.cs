@@ -10,19 +10,31 @@ using UnityEngine.InputSystem;
 public class MenuHandlerSingleton : MonoBehaviour
 {
     public static MenuHandlerSingleton Singleton;
+    public string NoMenuActionMap;
     public List<MenuBehaviour> Menus;
+    PlayerInput playerInput;
     MenuBehaviour activeMenu;
     MenuBehaviour previousMenu;
-    [SerializeField] float menuFadeTime = ScreenFade.DefaultSpeed;
-    public static float MenuFadeTime = ScreenFade.DefaultSpeed;
+    float timePassed = 0f;
+    bool recentlyChangedMenus = false;
 
     void Awake() {
-        MenuFadeTime = menuFadeTime;
+        playerInput = GetComponent<PlayerInput>();
         if (Singleton == null) {
             Singleton = this;
         } else {
             Destroy(this);
             return;
+        }
+    }
+
+    private void Update()
+    {
+        timePassed += Time.deltaTime;
+        if (timePassed > 0.5f)
+        {
+            recentlyChangedMenus = false;
+            timePassed = 0f;
         }
     }
 
@@ -40,17 +52,16 @@ public class MenuHandlerSingleton : MonoBehaviour
             Debug.LogError("No Canvases given to MenuHandler");
             return;
         }
-        if (Menus[index] == activeMenu) return;
+        if (activeMenu != null && Menus[index] == activeMenu) return;
         if (activeMenu != null && updatePrevious) previousMenu = activeMenu;
         DisableAllMenus();
 
         MenuBehaviour menu = Menus[index];
         activeMenu = menu;
+        recentlyChangedMenus = true;
         menu.gameObject.SetActive(true);
         menu.GetFirstSelectable().Select();
     }
-
-    void changeMenu(MenuBehaviour menu, bool updatePrevious = true) => changeMenu(menu.MenuName, updatePrevious);
 
     public void DisableAllMenus() {
         for (int i = 0; i < Menus.Count; i++)
@@ -71,19 +82,32 @@ public class MenuHandlerSingleton : MonoBehaviour
 
     public void ChangeToPreviousMenu()
     {
-        if (previousMenu == null) return;
-        StartCoroutine(changeMenuCoroutine(previousMenu.MenuName, false));
+        if (recentlyChangedMenus) return;
+        CloseMenu(activeMenu);
+        if (previousMenu != null)
+            changeMenu(previousMenu.MenuName, false);
     }
 
-    public void ChangeMenu(string menuName) => StartCoroutine(changeMenuCoroutine(menuName));
+    public void CloseMenu(MenuBehaviour menu)
+    {
+        if (menu == null)
+            return;
+        menu.gameObject.SetActive(false);
+        if (menu == activeMenu)
+            activeMenu = null;
 
-    IEnumerator changeMenuCoroutine(string name, bool updatePrevious = true, float? time = null) {
-        time ??= MenuFadeTime;
-        yield return StartCoroutine(ScreenFade.Singleton.Fade(false, time.Value));
+        if (previousMenu == null)
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+            return;
+        }
+    }
 
-        changeMenu(name, updatePrevious);
+    public void ChangeMenu(string menuName) => ChangeMenu(menuName, true);
 
-        yield return StartCoroutine(ScreenFade.Singleton.Fade(true, time.Value));
+    public void ChangeMenu(string menuName, bool updatePrevious = true) { 
+        if (activeMenu != null && activeMenu.MenuName == menuName) return;
+        changeMenu(menuName, updatePrevious);
     }
 
     [Button]

@@ -54,4 +54,7 @@ public class MenuBehaviour : MonoBehaviour
     }
 
     public void ChangeMenu(string name) => MenuHandlerSingleton.Singleton.ChangeMenu(name);
+
+    public void CloseMenu() => MenuHandlerSingleton.Singleton.CloseMenu(this);
+    public void OpenMenu() => MenuHandlerSingleton.Singleton.ChangeMenu(menuName);
 }

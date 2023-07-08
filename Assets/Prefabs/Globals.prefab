@@ -37,7 +37,7 @@ Transform:
   m_Children:
   - {fileID: 4770273136093357345}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1640577582785778481
 MonoBehaviour:
@@ -117,9 +117,17 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c7f02f27-9712-4f7a-bc8a-47d41f46dcc4
+    m_ActionName: Player/Aim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1494655-34c6-4fd8-a756-77195273c55e
+    m_ActionName: Player/Attack[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
-  m_DefaultActionMap: UI
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2718463252516879178
@@ -154,7 +162,7 @@ MonoBehaviour:
         m_PersistentCalls:
           m_Calls:
           - m_Target: {fileID: 5808248516238360711}
-            m_TargetAssemblyTypeName: MenuHandler, Assembly-CSharp
+            m_TargetAssemblyTypeName: MenuHandlerSingleton, Assembly-CSharp
             m_MethodName: ChangeToPreviousMenu
             m_Mode: 1
             m_Arguments:
@@ -177,8 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af909b885182ce44fbb8282a55fe98f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NoMenuActionMap: 
   Menus: []
-  menuFadeTime: 0.4
 --- !u!114 &4278808166483910365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +673,7 @@ PrefabInstance:
     - target: {fileID: 2471026193589469219, guid: 9398ac423bd289840a0fa94264dc922d,
         type: 3}
       propertyPath: m_text
-      value: 1280 x 1440 @ NaNHz
+      value: 640 x 480
       objectReference: {fileID: 0}
     - target: {fileID: 2671031142058606764, guid: 9398ac423bd289840a0fa94264dc922d,
         type: 3}
@@ -845,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 5371126597243849126, guid: 9398ac423bd289840a0fa94264dc922d,
         type: 3}
       propertyPath: m_text
-      value: 1280 x 1440 @ NaNHz
+      value: 640 x 480
       objectReference: {fileID: 0}
     - target: {fileID: 5849213655224234789, guid: 9398ac423bd289840a0fa94264dc922d,
         type: 3}
