@@ -17,6 +17,7 @@ namespace Assets.Scripts.Cells
         public SFXController audioController;
 
         bool suspended = false;
+        public bool Activated = false;
 
         [SerializeField]
         protected Rigidbody2D _rigidbody;
@@ -254,11 +255,25 @@ namespace Assets.Scripts.Cells
             if (suspended) return;
 
             var playerLoc = Player.Instance.GetPosition();
+
+            if (!Activated)
+            {
+                if (Vector2.Distance(playerLoc, transform.position) < 20f)
+                {
+                    Activated = true;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             // Maintain a min/max distance threshold from player
             maintainDistanceRangeFrom(playerLoc, minDistanceFromPlayer, maxDistanceFromPlayer);
 
             foreach (var cell in getOtherCells())
             {
+                if (!cell.Activated) continue;
                 maintainDistanceRangeFrom(cell.transform.position, minDistanceFromEnemies, maxDistanceFromEnemies);
             }
 
