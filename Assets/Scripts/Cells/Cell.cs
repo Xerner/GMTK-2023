@@ -15,6 +15,8 @@ namespace Assets.Scripts.Cells
         public Player ControllingPlayer;
         public bool IsControlled => ControllingPlayer != null;
 
+        bool suspended = false;
+
         [SerializeField]
         protected Rigidbody2D _rigidbody;
         [SerializeField]
@@ -61,6 +63,8 @@ namespace Assets.Scripts.Cells
         [SerializeField] float minDistanceFromEnemies = 2f;
         [SerializeField] float maxDistanceFromEnemies = 6f;
 
+        public bool IsPlayer { get => ControllingPlayer != null; }
+
         #endregion
 
         #region Unity Methods
@@ -83,6 +87,7 @@ namespace Assets.Scripts.Cells
 
         void FixedUpdate()
         {
+            if (suspended) return;
             if (ControllingPlayer == null)
             {
                 enemyUpdate();
@@ -93,21 +98,44 @@ namespace Assets.Scripts.Cells
         }
         public void OnTriggerEnter2D(Collider2D collision)
         {
-            if (currentInvincibilityTime > 0f)
-                return;
+            if (suspended) return;
+            if (IsPlayer && collision.gameObject.TryGetComponent<WeakSpot>(out var weakspot))
+            {
+                if (weakspot.transform.parent.gameObject.TryGetComponent<Cell>(out var cellToTakeover))
+                    TakeoverCell(cellToTakeover);
+            }
 
             // Uh oh, stinky
-            var damage = collision.gameObject.GetComponent<Projectile>().BulletStrength;
-            if (LayerMask.LayerToName(gameObject.layer) == "Player")
-                SetHealth(_currentHealth - damage);
-            else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
-                SetHealth(_currentHealth - damage*2);
-
-            currentInvincibilityTime = invincibilityTime;
-            PlayDamagedAnimation();
+            if (collision.gameObject.TryGetComponent<Projectile>(out var projectile))
+                TakeDamage(projectile.BulletStrength);
         }
 
         #endregion
+
+        public void TakeoverCell(Cell cellToTakeover)
+        {
+            ControllingPlayer.SwapControl(cellToTakeover);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            if (IsPlayer) {
+                if (currentInvincibilityTime <= 0f)
+                {
+                    currentInvincibilityTime = invincibilityTime;
+                    PlayDamagedAnimation();
+                } else
+                {
+                    // not so stinky
+                    return;
+                } 
+            }
+
+            if (LayerMask.LayerToName(gameObject.layer) == "Player")
+                SetHealth(_currentHealth - damage);
+            else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
+                SetHealth(_currentHealth - damage * 2);
+        }
 
         public void SetHealth(float newHealth, float? totalHealth = null)
         {
@@ -134,6 +162,7 @@ namespace Assets.Scripts.Cells
 
         public void Dash()
         {
+            if (suspended) return;
             if (_currentDashCooldown <= 0f)
             {
                 _currentDashCooldown = _dashCooldown;
@@ -155,17 +184,20 @@ namespace Assets.Scripts.Cells
 
         public void Move(Vector2 moveVector)
         {
+            if (suspended) return;
             var movementDelta = moveVector * Speed;
             _rigidbody.AddForce(movementDelta);
         }
 
         public void Shoot()
         {
+            if (suspended) return;
             _attack?.UseAttack((Vector2)transform.up);
         }
 
         private void enemyUpdate()
         {
+            if (suspended) return;
             var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
             // Maintain a min/max distance threshold from player
@@ -207,6 +239,27 @@ namespace Assets.Scripts.Cells
             // Note that we use GetType() instead of Cell because we want the current subclass
             // if there is one.
             return FindObjectsOfType(GetType()).Where(cell => cell != this).Cast<Cell>();
+        }
+
+        public void Suspend()
+        {
+            suspended = true;
+            if (IsPlayer)
+                gameObject.SetActive(false);
+            else
+                Destroy();
+        }
+
+        public void Resume()
+        {
+            suspended = false;
+            if (IsPlayer)
+                gameObject.SetActive(true);
+        }
+
+        public void Destroy()
+        {
+            if (!IsPlayer) Destroy(this);
         }
     }
 }

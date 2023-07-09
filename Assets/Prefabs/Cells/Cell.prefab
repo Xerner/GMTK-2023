@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2839479021325514624}
   - component: {fileID: 746644814884220291}
-  - component: {fileID: 1186134176693506701}
-  m_Layer: 0
+  - component: {fileID: 4203606400740381270}
+  - component: {fileID: 7684468681421345602}
+  m_Layer: 7
   m_Name: WeakSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,13 +87,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!136 &1186134176693506701
-CapsuleCollider:
+--- !u!114 &4203606400740381270
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3792661709877852007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be6f9525c949854cb4b5ecb8a13e6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!70 &7684468681421345602
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3792661709877852007}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -101,14 +116,24 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.0000005
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2.0000005}
+  m_Direction: 0
 --- !u!1 &4807889144283560315
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +169,7 @@ Transform:
   m_Children:
   - {fileID: 2839479021325514624}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8075944941402725410
 SpriteRenderer:
@@ -239,13 +264,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllingPlayer: {fileID: 0}
-  _attack: {fileID: 8750676881874488107}
   _rigidbody: {fileID: 4360441159806015926}
-  _health: 100
-  Speed: 30
+  _sprite: {fileID: 8075944941402725410}
+  _currentHealth: 0
+  totalHealth: 100
+  BaseSpeed: 3
+  _attack: {fileID: 8750676881874488107}
+  ShootInterval: 0.5
   DashForce: 1000
   DashSpeedTime: 1
   _dashCooldown: 2
+  minDistanceFromPlayer: 4
+  maxDistanceFromPlayer: 8
+  minDistanceFromEnemies: 2
+  maxDistanceFromEnemies: 6
 --- !u!114 &8750676881874488107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +293,8 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6777395665268390530, guid: f86259f9e954046b59b18dc1952ab0d9,
     type: 3}
   _pattern: 0
+  _overrideProjectileLifetime: -1
+  _overrideProjectileSpeed: -1
 --- !u!58 &3603605498478368968
 CircleCollider2D:
   m_ObjectHideFlags: 0

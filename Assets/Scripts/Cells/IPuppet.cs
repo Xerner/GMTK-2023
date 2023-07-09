@@ -27,4 +27,19 @@ public interface IPuppet
     /// Dashes in the current facing direction
     /// </summary>
     public void Dash();
+
+    /// <summary>
+    /// Disables any controls and activity
+    /// </summary>
+    public void Suspend();
+
+    /// <summary>
+    /// Re-enables any controls and activity
+    /// </summary>
+    public void Resume();
+
+    /// <summary>
+    /// Destroys the object
+    /// </summary>
+    public void Destroy();
 }

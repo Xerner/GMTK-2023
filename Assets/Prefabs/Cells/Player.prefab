@@ -353,7 +353,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &6461206602952220126
 MonoBehaviour:
@@ -368,14 +368,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllingPlayer: {fileID: 0}
-  _attack: {fileID: 7629100901655180347}
   _rigidbody: {fileID: 2147220674680990847}
+  _sprite: {fileID: 6707571172637874082}
   _currentHealth: 0
-  StartingHealth: 100
+  totalHealth: 100
   BaseSpeed: 3
+  _attack: {fileID: 7629100901655180347}
+  ShootInterval: 0.5
   DashForce: 3000
   DashSpeedTime: 1
   _dashCooldown: 2
+  minDistanceFromPlayer: 4
+  maxDistanceFromPlayer: 8
+  minDistanceFromEnemies: 2
+  maxDistanceFromEnemies: 6
 --- !u!114 &7629100901655180347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +397,8 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6777395665268390530, guid: f86259f9e954046b59b18dc1952ab0d9,
     type: 3}
   _pattern: 0
+  _overrideProjectileLifetime: -1
+  _overrideProjectileSpeed: -1
 --- !u!60 &6207394776933620106
 PolygonCollider2D:
   m_ObjectHideFlags: 0
