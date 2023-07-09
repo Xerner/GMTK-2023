@@ -51,7 +51,7 @@ namespace Assets.Scripts.Cells
             }
         }
 
-        private void SetRbVelocity() => _rigidbody.velocity = transform.up * (LaunchSpeedOffset + _speed);
+        private void SetRbVelocity() => _rigidbody.velocity = transform.up * (LaunchSpeedOffset + _speed * 2f);
 
         public void OnTriggerEnter2D(Collider2D collision)
         {
