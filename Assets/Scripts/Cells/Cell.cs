@@ -64,7 +64,6 @@ namespace Assets.Scripts.Cells
             {
                 _currentDashCooldown = _dashCooldown;
                 Vector2 dashForce = transform.up * DashForce;
-                Debug.Log(dashForce);
                 _rigidbody.AddForce(dashForce);
             }
         }
@@ -73,6 +72,8 @@ namespace Assets.Scripts.Cells
         {
             var angle = Vector2.SignedAngle(Vector2.up, pointToFace - (Vector2)transform.position);
             _rigidbody.MoveRotation(angle);
+            //Debug.Log(angle);
+
             return angle;
         }
 

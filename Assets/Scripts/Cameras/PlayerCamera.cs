@@ -26,7 +26,6 @@ namespace Assets.Scripts.Cameras
             this.EnsureHasReference(ref _focusPoint);
         }
 
-        // Update is called once per frame
         void Update()
         {
             var mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);

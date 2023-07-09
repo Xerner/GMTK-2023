@@ -208,7 +208,7 @@ PrefabInstance:
     - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
         type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
         type: 3}
@@ -229,6 +229,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_ActionName
       value: Player/Attack[/Mouse/leftButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 247911831}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AcceptDash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Player, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1640577582785778481, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[15].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2129490648020956601, guid: e4268eb9af8f8e04299cfd5d2af44fd6,
         type: 3}
@@ -652,7 +687,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532907015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.129181, y: -2.6840394, z: -102940}
+  m_LocalPosition: {x: -4.129181, y: -2.6840394, z: -1680}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -982,7 +1017,7 @@ PrefabInstance:
     - target: {fileID: 4986875637574354537, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -102940
+      value: -1680
       objectReference: {fileID: 0}
     - target: {fileID: 5014366327759963470, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}

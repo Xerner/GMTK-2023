@@ -95,6 +95,7 @@ public class Player : MonoBehaviour
         // TODO: Use input actions to allow us to use controllers too
         var mouseScreenPosition = Mouse.current.position.ReadValue();
         var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Debug.Log(mouseWorldPosition);
 
         _controlledCell.FaceToward(mouseWorldPosition);
 
