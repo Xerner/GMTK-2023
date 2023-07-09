@@ -160,6 +160,10 @@ namespace Assets.Scripts.Cells
 
         public void TakeoverCell(Cell cellToTakeover)
         {
+            totalHealth = 100f;
+            _currentHealth = 100f;
+            SetHealth(totalHealth);
+            cellToTakeover.SetHealth(100f, 100f);
             audioController.PlayRandom(audioController.invadeAudio);
             ControllingPlayer.SwapControl(cellToTakeover);
         }
@@ -261,7 +265,7 @@ namespace Assets.Scripts.Cells
 
             if (!Activated)
             {
-                if (Vector2.Distance(playerLoc, transform.position) < 20f)
+                if (Vector2.Distance(playerLoc, transform.position) < 13f)
                 {
                     Activated = true;
                 }
