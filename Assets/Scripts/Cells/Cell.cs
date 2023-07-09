@@ -17,10 +17,17 @@ namespace Assets.Scripts.Cells
 
         [SerializeField]
         protected Rigidbody2D _rigidbody;
+        [SerializeField]
+        protected SpriteRenderer _sprite;
 
         [Header("Base Stats")]
         [SerializeField] float _currentHealth;
         [SerializeField] float totalHealth = 100f;
+        [SerializeField][Description("Seconds")]
+        const float INVINCIBILITY_TWEEN_TIMING = 0.25f;
+        const int INVINCIBILITY_TWEEN_PINGPONGS = 3;
+        float invincibilityTime = INVINCIBILITY_TWEEN_TIMING * 2 * INVINCIBILITY_TWEEN_PINGPONGS; // x2 because it ping pongs
+        float currentInvincibilityTime = 0f;
 
         public Action<float, float> OnHealthChange;
 
@@ -58,6 +65,14 @@ namespace Assets.Scripts.Cells
 
         #region Unity Methods
 
+        void OnValidate()
+        {
+            if (_sprite == null)
+                _sprite = transform.FindFirst<SpriteRenderer>();
+            if (_sprite == null)
+                Debug.LogError("Could not find a SpriteRenderer", this);
+        }
+
         void Awake()
         {
             this.EnsureHasReference(ref _attack);
@@ -74,18 +89,22 @@ namespace Assets.Scripts.Cells
             }
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
+            currentInvincibilityTime -= Time.deltaTime;
         }
         public void OnTriggerEnter2D(Collider2D collision)
         {
+            if (currentInvincibilityTime > 0f)
+                return;
+
+            // Uh oh, stinky
             var damage = collision.gameObject.GetComponent<Projectile>().BulletStrength;
             if (LayerMask.LayerToName(gameObject.layer) == "Player")
-            {
                 SetHealth(_currentHealth - damage);
-            }
             else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
-            {
                 SetHealth(_currentHealth - damage*2);
-            }
+
+            currentInvincibilityTime = invincibilityTime;
+            PlayDamagedAnimation();
         }
 
         #endregion
@@ -97,6 +116,20 @@ namespace Assets.Scripts.Cells
 
             _currentHealth = newHealth;
             OnHealthChange?.Invoke(_currentHealth, this.totalHealth);
+        }
+
+        public void PlayDamagedAnimation()
+        {
+
+            LTDescr descr = LeanTween.value(gameObject, SetAlpha, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
+            descr.setLoopPingPong(INVINCIBILITY_TWEEN_PINGPONGS);
+
+            void SetAlpha(float alpha)
+            {
+                Color color = _sprite.color;
+                color.a = alpha;
+                _sprite.color = color;
+            }
         }
 
         public void Dash()

@@ -9,7 +9,7 @@ public static class TransformExtensions
     /// <typeparam name="T">A MonoBehaviour</typeparam>
     /// <param name="root">The transform to start at</param>
     /// <returns>The first component of type T. Returns null if none found</returns>
-    public static T FindFirst<T>(this Transform root, bool onlyActiveObjects = true, SearchType searchType = SearchType.DepthFirst) where T : MonoBehaviour {
+    public static T FindFirst<T>(this Transform root, bool onlyActiveObjects = true, SearchType searchType = SearchType.DepthFirst) where T : Component {
         if (searchType == SearchType.DepthFirst) { 
             if (root.TryGetComponent(out T behaviour)) {
                 return behaviour;
@@ -22,29 +22,22 @@ public static class TransformExtensions
             }
             return null;
         } else if (searchType == SearchType.BreadthFirst) {
-            // Create a queue to hold the nodes at the current depth level
             Queue<Transform> queue = new Queue<Transform>();
 
-            // Enqueue the root node
             queue.Enqueue(root);
 
-            // Continue while there are nodes in the queue
             while (queue.Count > 0) {
-                // Dequeue the next node
                 Transform node = queue.Dequeue();
 
-                // If the node value matches the search criteria, return it
                 if (node.TryGetComponent(out T component)) {
                     return component;
                 }
 
-                // Enqueue the child nodes
                 foreach (Transform childNode in node) {
                     queue.Enqueue(childNode);
                 }
             }
 
-            // Return the default value if the search fails
             return default(T);
         }
         return default(T);

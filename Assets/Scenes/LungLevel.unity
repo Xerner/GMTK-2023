@@ -1261,7 +1261,7 @@ PrefabInstance:
     - target: {fileID: 3007217433275312707, guid: c971e5d82a11fbf4b84c62e26c5ad2f7,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8376514436135131934, guid: c971e5d82a11fbf4b84c62e26c5ad2f7,
         type: 3}
@@ -1547,6 +1547,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4848355245610821638, guid: 14afe579d32fd044b9778037aa7ad721,
+        type: 3}
+      propertyPath: ShootInterval
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5363406593145377199, guid: 14afe579d32fd044b9778037aa7ad721,
         type: 3}
       propertyPath: m_Name
@@ -1555,7 +1560,7 @@ PrefabInstance:
     - target: {fileID: 5363406593145377199, guid: 14afe579d32fd044b9778037aa7ad721,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
