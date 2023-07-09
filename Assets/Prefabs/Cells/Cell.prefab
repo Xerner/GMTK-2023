@@ -268,7 +268,7 @@ MonoBehaviour:
   _weakSpot: {fileID: 746644814884220291}
   _currentHealth: 0
   totalHealth: 100
-  BaseSpeed: 3
+  BaseSpeed: 30
   _attack: {fileID: 8750676881874488107}
   ShootInterval: 0.5
   DashForce: 1000

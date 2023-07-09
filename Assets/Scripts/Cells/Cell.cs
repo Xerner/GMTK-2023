@@ -23,6 +23,8 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         protected SpriteRenderer _weakSpot;
         private float weakSpotAlpha = 0f;
+        private float spriteAlpha = 1f;
+        private float spriteFlashAlpha = 1f;
 
         [Header("Base Stats")]
         [SerializeField] float _currentHealth;
@@ -111,6 +113,11 @@ namespace Assets.Scripts.Cells
             {
                 playerUpdate();
             }
+
+            var color = _sprite.color;
+            color.a = spriteAlpha * spriteFlashAlpha * (suspended ? 0.35f : 1f);
+            _sprite.color = color;
+
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
             if (IsPlayer && ControllingPlayer.IsAssimilating)
@@ -127,10 +134,11 @@ namespace Assets.Scripts.Cells
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (suspended) return;
-            if (IsPlayer && collision.gameObject.TryGetComponent<WeakSpot>(out var weakspot))
+            if (IsPlayer
+                && collision.gameObject.TryGetComponent<WeakSpot>(out var weakspot)
+                && weakspot.transform.parent.gameObject.TryGetComponent<Cell>(out var cellToTakeover))
             {
-                if (weakspot.transform.parent.gameObject.TryGetComponent<Cell>(out var cellToTakeover))
-                    TakeoverCell(cellToTakeover);
+                TakeoverCell(cellToTakeover);
             }
 
             // Uh oh, stinky
@@ -165,12 +173,6 @@ namespace Assets.Scripts.Cells
                 SetHealth(_currentHealth - damage);
             else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
                 SetHealth(_currentHealth - damage * 2);
-
-            if (!IsPlayer && _currentHealth <= 0f)
-            {
-                SetAlpha(0.35f);
-                suspended = true;
-            }
         }
 
         public void SetHealth(float newHealth, float? totalHealth = null)
@@ -180,22 +182,17 @@ namespace Assets.Scripts.Cells
 
             _currentHealth = newHealth;
             OnHealthChange?.Invoke(_currentHealth, this.totalHealth);
+
+            if (!IsPlayer && _currentHealth <= 0f)
+            {
+                suspended = true;
+            }
         }
 
         public void PlayDamagedAnimation()
         {
-
-            LTDescr descr = LeanTween.value(gameObject, SetAlpha, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
+            LTDescr descr = LeanTween.value(gameObject, a => spriteFlashAlpha = a, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
             descr.setLoopPingPong(INVINCIBILITY_TWEEN_PINGPONGS);
-
-
-        }
-
-        void SetAlpha(float alpha)
-        {
-            Color color = _sprite.color;
-            color.a = alpha;
-            _sprite.color = color;
         }
 
         public void Dash()
