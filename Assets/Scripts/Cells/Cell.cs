@@ -294,6 +294,18 @@ namespace Assets.Scripts.Cells
                 wsColor.a = 0;
                 _weakSpot.color = wsColor;
             }
+
+            if (_currentHealth <= 0)
+            {
+                StartCoroutine(die());
+            }
+        }
+
+        private IEnumerator die()
+        {
+            spriteAlpha = 0;
+            yield return new WaitForSeconds(1.5f);
+            Application.LoadLevel("MainMenu");
         }
 
         private void maintainDistanceRangeFrom(Vector3 pos, float min, float max)

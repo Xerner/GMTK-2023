@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
         // TODO: call disable action on cell
         // For player cell this should disable
         // For non player cell destroy?
-        if (_controlledCell != null) 
+        if (_controlledCell != null)
             _controlledCell.Suspend();
         newCell.Resume();
         _controlledCell = newCell;
