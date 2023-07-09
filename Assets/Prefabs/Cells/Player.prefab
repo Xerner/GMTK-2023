@@ -373,7 +373,7 @@ MonoBehaviour:
   _currentHealth: 0
   StartingHealth: 100
   BaseSpeed: 3
-  DashForce: 1000
+  DashForce: 3000
   DashSpeedTime: 1
   _dashCooldown: 2
 --- !u!114 &7629100901655180347
@@ -465,7 +465,7 @@ Transform:
   m_GameObject: {fileID: 5422604238283565615}
   m_LocalRotation: {x: 0, y: 0, z: 0.2932895, w: 0.9560237}
   m_LocalPosition: {x: -0.034, y: 0.015, z: 0}
-  m_LocalScale: {x: 0.86262995, y: 0.8281247, z: 0.86262995}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9120923739698710430}
