@@ -15,35 +15,39 @@ namespace Assets.Scripts.Cells
         public Player ControllingPlayer;
         public SFXController audioController;
 
-        public bool IsControlled => ControllingPlayer != null;
-
         bool suspended = false;
 
         [SerializeField]
         protected Rigidbody2D _rigidbody;
         [SerializeField]
         protected SpriteRenderer _sprite;
+        [SerializeField]
+        protected SpriteRenderer _weakSpot;
+        private float weakSpotAlpha = 0f;
+        private float spriteAlpha = 1f;
+        private float spriteFlashAlpha = 1f;
 
         [Header("Base Stats")]
         [SerializeField] float _currentHealth;
         [SerializeField] float totalHealth = 100f;
-        [SerializeField][Description("Seconds")]
-        const float INVINCIBILITY_TWEEN_TIMING = 0.25f;
+        [SerializeField]
+        [Description("Seconds")]
+        const float INVINCIBILITY_TWEEN_TIMING = 0.15f;
         const int INVINCIBILITY_TWEEN_PINGPONGS = 3;
         float invincibilityTime = INVINCIBILITY_TWEEN_TIMING * 2 * INVINCIBILITY_TWEEN_PINGPONGS; // x2 because it ping pongs
         float currentInvincibilityTime = 0f;
 
         public Action<float, float> OnHealthChange;
 
-        public float Speed => IsControlled
+        public float Speed => IsPlayer
             ? BaseSpeed
             : 1f + (BaseSpeed * (_currentHealth / totalHealth));
         public float BaseSpeed = 3f;
-        public float RotationSpeed => IsControlled
+        public float RotationSpeed => IsPlayer
             ? BaseRotationSpeed
             : 1f + (BaseRotationSpeed * (_currentHealth / totalHealth));
         private float BaseRotationSpeed = 15f;
-        
+
         [Header("Attacks")]
         [SerializeField]
         protected Attack _attack;
@@ -70,7 +74,7 @@ namespace Assets.Scripts.Cells
         [SerializeField] float minDistanceFromEnemies = 2f;
         [SerializeField] float maxDistanceFromEnemies = 6f;
 
-        public bool IsPlayer { get => ControllingPlayer != null; }
+        public bool IsPlayer => ControllingPlayer != null;
 
         #endregion
 
@@ -90,6 +94,14 @@ namespace Assets.Scripts.Cells
             this.EnsureHasReference(ref _rigidbody);
             SetHealth(totalHealth);
             _rigidbody.drag = 5f;
+            _rigidbody.angularDrag = 5f;
+
+            // Runs forever
+            var weakSpotTween = LeanTween.value(gameObject, (alpha) =>
+            {
+                weakSpotAlpha = alpha;
+            }, 0f, 1f, 0.5f);
+            weakSpotTween.setLoopPingPong();
         }
 
         void FixedUpdate()
@@ -98,13 +110,23 @@ namespace Assets.Scripts.Cells
             {
                 enemyUpdate();
             }
+            else
+            {
+                playerUpdate();
+            }
+
+            var color = _sprite.color;
+            color.a = spriteAlpha * spriteFlashAlpha * (suspended ? 0.35f : 1f);
+            _sprite.color = color;
+
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
             if (IsPlayer && ControllingPlayer.IsAssimilating)
             {
                 _currentAssimilateCooldown = Mathf.Clamp(_currentAssimilateCooldown - Time.deltaTime, 0f, _assimilateCooldown);
                 OnAssimilateCooldownChange?.Invoke(_assimilateCooldown, _currentAssimilateCooldown);
-            } else
+            }
+            else
             {
                 OnAssimilateCooldownChange?.Invoke(_assimilateCooldown, _assimilateCooldown);
             }
@@ -113,10 +135,11 @@ namespace Assets.Scripts.Cells
         public void OnTriggerEnter2D(Collider2D collision)
         {
             if (suspended) return;
-            if (IsPlayer && collision.gameObject.TryGetComponent<WeakSpot>(out var weakspot))
+            if (IsPlayer
+                && collision.gameObject.TryGetComponent<WeakSpot>(out var weakspot)
+                && weakspot.transform.parent.gameObject.TryGetComponent<Cell>(out var cellToTakeover))
             {
-                if (weakspot.transform.parent.gameObject.TryGetComponent<Cell>(out var cellToTakeover))
-                    TakeoverCell(cellToTakeover);
+                TakeoverCell(cellToTakeover);
             }
 
             // Uh oh, stinky
@@ -134,12 +157,14 @@ namespace Assets.Scripts.Cells
 
         public void TakeDamage(float damage)
         {
-            if (IsPlayer) {
+            if (IsPlayer)
+            {
                 if (currentInvincibilityTime <= 0f)
                 {
                     currentInvincibilityTime = invincibilityTime;
                     PlayDamagedAnimation();
-                } else
+                }
+                else
                 {
                     // not so stinky
                     return;
@@ -160,20 +185,17 @@ namespace Assets.Scripts.Cells
 
             _currentHealth = newHealth;
             OnHealthChange?.Invoke(_currentHealth, this.totalHealth);
+
+            if (!IsPlayer && _currentHealth <= 0f)
+            {
+                suspended = true;
+            }
         }
 
         public void PlayDamagedAnimation()
         {
-
-            LTDescr descr = LeanTween.value(gameObject, SetAlpha, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
+            LTDescr descr = LeanTween.value(gameObject, a => spriteFlashAlpha = a, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
             descr.setLoopPingPong(INVINCIBILITY_TWEEN_PINGPONGS);
-
-            void SetAlpha(float alpha)
-            {
-                Color color = _sprite.color;
-                color.a = alpha;
-                _sprite.color = color;
-            }
         }
 
         public void Dash()
@@ -219,7 +241,6 @@ namespace Assets.Scripts.Cells
         {
             if (suspended) return;
             var playerLoc = Player.Instance.GetPosition();
-            // Currently assumes player is ~1 unit in size
             // Maintain a min/max distance threshold from player
             maintainDistanceRangeFrom(playerLoc, minDistanceFromPlayer, maxDistanceFromPlayer);
 
@@ -234,6 +255,23 @@ namespace Assets.Scripts.Cells
             {
                 Shoot();
                 _lastShootTime = Time.time;
+            }
+
+            if (_weakSpot != null)
+            {
+                Color wsColor = _weakSpot.color;
+                wsColor.a = weakSpotAlpha * (1 - (_currentHealth / totalHealth));
+                _weakSpot.color = wsColor;
+            }
+        }
+
+        private void playerUpdate()
+        {
+            if (_weakSpot != null)
+            {
+                Color wsColor = _weakSpot.color;
+                wsColor.a = 0;
+                _weakSpot.color = wsColor;
             }
         }
 

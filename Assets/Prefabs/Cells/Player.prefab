@@ -171,7 +171,6 @@ MonoBehaviour:
   cameraTargetDivider: 3
   _focusPoint: {fileID: 2285164720998890162}
   _mainCamera: {fileID: 0}
-  _playerCell: {fileID: 6461206602952220126}
 --- !u!1 &2285164720998890162
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +369,7 @@ MonoBehaviour:
   ControllingPlayer: {fileID: 0}
   _rigidbody: {fileID: 2147220674680990847}
   _sprite: {fileID: 6707571172637874082}
+  _weakSpot: {fileID: 0}
   _currentHealth: 0
   totalHealth: 100
   BaseSpeed: 3
@@ -378,6 +378,7 @@ MonoBehaviour:
   DashForce: 3000
   DashSpeedTime: 1
   _dashCooldown: 2
+  _assimilateCooldown: 5
   minDistanceFromPlayer: 4
   maxDistanceFromPlayer: 8
   minDistanceFromEnemies: 2
@@ -428,7 +429,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -565,7 +566,7 @@ Transform:
   - {fileID: 9120923739698710430}
   - {fileID: 4986875637574354537}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2599373319797223141
 MonoBehaviour:

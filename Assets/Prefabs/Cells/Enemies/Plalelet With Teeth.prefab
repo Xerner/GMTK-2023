@@ -8,6 +8,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 746644814884220291, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_RootOrder
@@ -67,6 +72,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Plalelet With Teeth
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417182241386747463, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: m_LayerOverridePriority
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8075944941402725410, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
