@@ -262,7 +262,7 @@ namespace Assets.Scripts.Cells
 
             if (!Activated)
             {
-                if (Vector2.Distance(playerLoc, transform.position) < 20f)
+                if (Vector2.Distance(playerLoc, transform.position) < 13f)
                 {
                     Activated = true;
                 }
