@@ -1,4 +1,3 @@
-using MarkupAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,10 +13,8 @@ public class TypewriterBehaviour : MonoBehaviour
     [SerializeField] TextMeshProUGUI text;
     public GameSetting<float> TypingSpeed;
     [TextArea][SerializeField] string message = "";
-    [Foldout("Events")]
     public UnityEvent OnStartTyping; 
     public UnityEvent OnFinishedTyping;
-    [EndGroup]
     float typingSpeed;
     int currentLength = 0;
     float passedTime = 0f;

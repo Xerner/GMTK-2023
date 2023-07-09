@@ -1,4 +1,3 @@
-using MarkupAttributes;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,7 +15,6 @@ public class DialogBoxBehaviour : MonoBehaviour, IDialogBox {
     [SerializeField] float heightWithoutText = 15f;
     [SerializeField] int linesToShow = 1;
     public List<DialogTrigger> DialogTriggers;
-    [Foldout("Dialog Box Components")]
     [SerializeField] Image frame;
     GameSetting<Sprite> frameSetting;
     [SerializeField] TextMeshProUGUI text;

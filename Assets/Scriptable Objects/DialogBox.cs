@@ -1,4 +1,3 @@
-using MarkupAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -8,20 +7,14 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "New Dialog Box", menuName = "UI/Dialog Box")]
 public class DialogBox : ScriptableObject {
     //public static DialogBox Singleton;
-    [TitleGroup("General", contentBox: true)]
     [SerializeField] 
     new string name;
     [Description("The root GameObject of the prefab should have a DialogBoxBehaviour component")]
     public DialogBoxBehaviour Prefab;
-    [TitleGroup("Frame Sprite", contentBox: true)]
-    [HideIf("useSettingFrame")]
     public Sprite Frame;
-    [ShowIf("useSettingFrame")]
     public GameSetting<Sprite> FrameSetting;
-    [EndGroup]
     [Space]
 
-    [TitleGroup("Text", contentBox: true)]
     public Color TextColor;
     public Color TextShadowColor;
 

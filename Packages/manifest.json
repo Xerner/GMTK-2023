@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.gasgiant.markupattributes": "https://github.com/gasgiant/Markup-Attributes.git#upm",
     "com.madsbangh.easybuttons": "https://github.com/madsbangh/EasyButtons.git#upm",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.collab-proxy": "2.0.5",

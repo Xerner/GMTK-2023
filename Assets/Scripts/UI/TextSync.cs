@@ -1,5 +1,4 @@
 using EasyButtons;
-using MarkupAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +22,6 @@ public class TextSync : MonoBehaviour
     
 If empty, defaults to the first childs Text Mesh Pro component (if it has one)")]
     public bool syncMargin = true;
-    [EndGroup]
 
     [Header("Slider")]
     public Slider sliderSource;

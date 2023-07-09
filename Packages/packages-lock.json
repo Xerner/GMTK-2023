@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.gasgiant.markupattributes": {
-      "version": "https://github.com/gasgiant/Markup-Attributes.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0cc6036815eadab678a378cbee731c47357907cb"
-    },
     "com.madsbangh.easybuttons": {
       "version": "https://github.com/madsbangh/EasyButtons.git#upm",
       "depth": 0,
