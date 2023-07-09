@@ -21,7 +21,6 @@ namespace Assets.Scripts.Cameras
 
         private void Start()
         {
-            _mainCamera = Camera.main;
             this.EnsureHasReference(ref _playerCell);
             this.EnsureHasReference(ref _mainCamera);
             this.EnsureHasReference(ref _focusPoint);
