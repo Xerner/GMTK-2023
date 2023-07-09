@@ -57,6 +57,11 @@ namespace Assets.Scripts.Cells
         float _currentDashCooldown = 0f;
         public Action<float, float> OnDashCooldownChange;
 
+        [Header("Assimilate - Player Only")]
+        [SerializeField] float _assimilateCooldown = 5f;
+        float _currentAssimilateCooldown = 5f;
+        public Action<float, float> OnAssimilateCooldownChange;
+
         [Header("Enemy Stats")]
         [SerializeField] float minDistanceFromPlayer = 4f;
         [SerializeField] float maxDistanceFromPlayer = 8f;
@@ -87,13 +92,20 @@ namespace Assets.Scripts.Cells
 
         void FixedUpdate()
         {
-            if (suspended) return;
             if (ControllingPlayer == null)
             {
                 enemyUpdate();
             }
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
+            if (IsPlayer && ControllingPlayer.IsAssimilating)
+            {
+                _currentAssimilateCooldown = Mathf.Clamp(_currentAssimilateCooldown - Time.deltaTime, 0f, _assimilateCooldown);
+                OnAssimilateCooldownChange?.Invoke(_assimilateCooldown, _currentAssimilateCooldown);
+            } else
+            {
+                OnAssimilateCooldownChange?.Invoke(_assimilateCooldown, _assimilateCooldown);
+            }
             currentInvincibilityTime -= Time.deltaTime;
         }
         public void OnTriggerEnter2D(Collider2D collision)

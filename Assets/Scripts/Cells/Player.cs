@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Cell _playerCell;
 
-    public Cell ControlledCell { get; private set; }
+    public Cell ControlledCell { get => _controlledCell; }
+    public bool IsAssimilating { get => _controlledCell != _playerCell; }
+    bool justCameOutOfAssimilate = false;
     public Action<Cell> OnCellSwap;
 
     public Vector3 GetPosition() => _controlledCell.transform.position;
@@ -53,6 +55,14 @@ public class Player : MonoBehaviour
     {
         // TODO: feed controls to _controlledCell
         // TODO: Use input actions to allow us to use controllers too
+        if (IsAssimilating)
+            _playerCell.transform.position = _controlledCell.transform.position;
+        if (justCameOutOfAssimilate)
+        {
+            _controlledCell.Dash();
+            justCameOutOfAssimilate = false;
+        }
+
         var mouseScreenPosition = Mouse.current.position.ReadValue();
         var mouseWorldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
@@ -111,13 +121,16 @@ public class Player : MonoBehaviour
             _controlledCell.Suspend();
         newCell.Resume();
         _controlledCell = newCell;
+        _controlledCell.BaseSpeed = _playerCell.BaseSpeed;
         _controlledCell.ControllingPlayer = this;
         OnCellSwap?.Invoke(_controlledCell);
     }
 
     public void RelieveControl()
     {
+        _playerCell.transform.rotation = (_controlledCell.transform.rotation);
         SwapControl(_playerCell);
+        justCameOutOfAssimilate = true;
     }
 
     private Coroutine shootOnDelayEnumerator;

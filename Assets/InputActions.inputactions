@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Release Victim",
+                    "type": "Button",
+                    "id": "7ab42182-bbdb-456b-94ff-1a6d241f16ac",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -245,6 +254,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "38c07653-0366-414e-949d-6d988ba5a971",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Release Victim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

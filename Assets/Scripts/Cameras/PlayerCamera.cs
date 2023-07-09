@@ -16,20 +16,24 @@ namespace Assets.Scripts.Cameras
         private GameObject _focusPoint;
         [SerializeField]
         private Camera _mainCamera;
-        [SerializeField]
-        private Cell _playerCell;
+        private Cell controlledCell;
 
         private void Start()
         {
-            this.EnsureHasReference(ref _playerCell);
+            Player.Instance.OnCellSwap += UpdateControlledCell;
             this.EnsureHasReference(ref _mainCamera);
             this.EnsureHasReference(ref _focusPoint);
+        }
+
+        public void UpdateControlledCell(Cell cell)
+        {
+            controlledCell = cell;
         }
 
         void Update()
         {
             var mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            var cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * _playerCell.transform.position) / cameraTargetDivider;
+            var cameraTargetPosition = (mousePosition + (cameraTargetDivider - 1) * controlledCell.transform.position) / cameraTargetDivider;
             _focusPoint.transform.position = cameraTargetPosition;
         }
     }

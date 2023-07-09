@@ -82,6 +82,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Release Victim"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ab42182-bbdb-456b-94ff-1a6d241f16ac"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -269,6 +278,17 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38c07653-0366-414e-949d-6d988ba5a971"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Release Victim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -752,6 +772,7 @@ namespace UnityEngine.InputSystem
             m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+            m_Player_ReleaseVictim = m_Player.FindAction("Release Victim", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -831,6 +852,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Aim;
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_Dash;
+        private readonly InputAction m_Player_ReleaseVictim;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -841,6 +863,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Aim => m_Wrapper.m_Player_Aim;
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
+            public InputAction @ReleaseVictim => m_Wrapper.m_Player_ReleaseVictim;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -868,6 +891,9 @@ namespace UnityEngine.InputSystem
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @ReleaseVictim.started += instance.OnReleaseVictim;
+                @ReleaseVictim.performed += instance.OnReleaseVictim;
+                @ReleaseVictim.canceled += instance.OnReleaseVictim;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -890,6 +916,9 @@ namespace UnityEngine.InputSystem
                 @Dash.started -= instance.OnDash;
                 @Dash.performed -= instance.OnDash;
                 @Dash.canceled -= instance.OnDash;
+                @ReleaseVictim.started -= instance.OnReleaseVictim;
+                @ReleaseVictim.performed -= instance.OnReleaseVictim;
+                @ReleaseVictim.canceled -= instance.OnReleaseVictim;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1051,6 +1080,7 @@ namespace UnityEngine.InputSystem
             void OnAim(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+            void OnReleaseVictim(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
