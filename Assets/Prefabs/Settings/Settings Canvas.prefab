@@ -974,7 +974,7 @@ PrefabInstance:
     - target: {fileID: 3627548736517019465, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
         type: 3}
       propertyPath: m_text
-      value: 1280 x 1440 @ NaNHz
+      value: 640 x 480
       objectReference: {fileID: 0}
     - target: {fileID: 3627548736517019465, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
         type: 3}
@@ -1155,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 6527807469912776396, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
         type: 3}
       propertyPath: m_text
-      value: 1280 x 1440 @ NaNHz
+      value: 640 x 480
       objectReference: {fileID: 0}
     - target: {fileID: 6527807469912776396, guid: a85f273f2dc9c1c4e9a6d3e352fbbd6b,
         type: 3}
@@ -1320,37 +1320,31 @@ MonoBehaviour:
   defaultChoiceIndex: 0
   gameSetting: {fileID: 11400000, guid: f805ec5eaa9c49146ad1f305d85661b9, type: 2}
   Choices:
-  - DisplayText: 640 x 480 @ NaNHz
-  - DisplayText: 720 x 480 @ NaNHz
-  - DisplayText: 720 x 576 @ NaNHz
-  - DisplayText: 800 x 600 @ NaNHz
-  - DisplayText: 1024 x 768 @ NaNHz
-  - DisplayText: 1152 x 864 @ NaNHz
-  - DisplayText: 1176 x 664 @ NaNHz
-  - DisplayText: 1280 x 720 @ NaNHz
-  - DisplayText: 1280 x 768 @ NaNHz
-  - DisplayText: 1280 x 800 @ NaNHz
-  - DisplayText: 1280 x 960 @ NaNHz
-  - DisplayText: 1280 x 1024 @ NaNHz
-  - DisplayText: 1280 x 1440 @ NaNHz
-  - DisplayText: 1360 x 768 @ NaNHz
-  - DisplayText: 1280 x 1440 @ NaNHz
-  - DisplayText: 1360 x 768 @ NaNHz
-  - DisplayText: 1280 x 1440 @ NaNHz
-  - DisplayText: 1360 x 768 @ NaNHz
-  - DisplayText: 1366 x 768 @ NaNHz
-  - DisplayText: 1440 x 1080 @ NaNHz
-  - DisplayText: 1280 x 1440 @ NaNHz
-  - DisplayText: 1440 x 1080 @ NaNHz
-  - DisplayText: 1600 x 900 @ NaNHz
-  - DisplayText: 1600 x 1024 @ NaNHz
-  - DisplayText: 1600 x 1200 @ NaNHz
-  - DisplayText: 1680 x 1050 @ NaNHz
-  - DisplayText: 1768 x 992 @ NaNHz
-  - DisplayText: 1920 x 1080 @ NaNHz
-  - DisplayText: 1920 x 1200 @ NaNHz
-  - DisplayText: 1920 x 1440 @ NaNHz
-  - DisplayText: 2560 x 1440 @ NaNHz
+  - DisplayText: 640 x 480
+  - DisplayText: 720 x 480
+  - DisplayText: 720 x 576
+  - DisplayText: 800 x 600
+  - DisplayText: 1024 x 768
+  - DisplayText: 1152 x 864
+  - DisplayText: 1176 x 664
+  - DisplayText: 1280 x 720
+  - DisplayText: 1280 x 768
+  - DisplayText: 1280 x 800
+  - DisplayText: 1280 x 960
+  - DisplayText: 1280 x 1024
+  - DisplayText: 1280 x 1440
+  - DisplayText: 1360 x 768
+  - DisplayText: 1366 x 768
+  - DisplayText: 1440 x 1080
+  - DisplayText: 1600 x 900
+  - DisplayText: 1600 x 1024
+  - DisplayText: 1600 x 1200
+  - DisplayText: 1680 x 1050
+  - DisplayText: 1768 x 992
+  - DisplayText: 1920 x 1080
+  - DisplayText: 1920 x 1200
+  - DisplayText: 1920 x 1440
+  - DisplayText: 2560 x 1440
   TargetText: {fileID: 2471026193589469219}
 --- !u!224 &6513412086815094992 stripped
 RectTransform:
