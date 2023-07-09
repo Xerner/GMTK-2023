@@ -24,6 +24,11 @@ public class PlayerInputConsumer : MonoBehaviour
         }
         Events.PlayerInput.SwitchCurrentActionMap(actionMapName);
     }
+
+    public void ChangeMenu(string menuName)
+    {
+        MenuHandlerSingleton.Singleton.ChangeMenu(menuName);
+    }
 }
 
 [Serializable]
