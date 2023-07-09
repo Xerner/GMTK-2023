@@ -123,18 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &148421375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-    type: 3}
-  m_PrefabInstance: {fileID: 1363077404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38b9f0863ca5a342b781f41d59f8348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &148421376 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2599373319797223141, guid: 088e2e674e2424799ac8c33d34387050,
@@ -498,102 +486,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1058149215611639639, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 839703069}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].InputActionReference
-      value: 
-      objectReference: {fileID: -9161248474364625117, guid: fcd97719b04f16e41b4362eb47450bc9,
-        type: 3}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: Events.Events.Array.data[3].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1414646917}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 148421376}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 148421375}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AcceptDash
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SwitchActionMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Player, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerInputConsumer, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6232471431340985107, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: m_RootOrder
@@ -648,11 +545,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6461206602952220126, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: DashForce
-      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9145220957328871123, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
