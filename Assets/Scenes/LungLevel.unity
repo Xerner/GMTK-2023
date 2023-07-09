@@ -1354,6 +1354,11 @@ PrefabInstance:
       propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2147220674680990847, guid: 088e2e674e2424799ac8c33d34387050,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3763878177269321656, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: m_LocalPosition.z
