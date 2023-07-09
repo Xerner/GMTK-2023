@@ -48,6 +48,17 @@ namespace Assets.Scripts.Cells
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
         }
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (LayerMask.LayerToName(gameObject.layer) == "Player")
+            {
+                Debug.Log("player hit");
+            }
+            else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
+            {
+                Debug.Log("enemy hit");
+            }
+        }
 
         public void SetHealth(float newHealth, float? totalHealth = null)
         {

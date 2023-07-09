@@ -129,6 +129,7 @@ namespace Assets.Scripts.Cells
             var bulletGO = Instantiate(_projectilePrefab, transform.position + (Vector3)offset, Quaternion.FromToRotation(Vector3.up, direction));
             bulletGO.transform.parent = transform;
             Projectile projectile = bulletGO.GetComponent<Projectile>();
+            bulletGO.layer = gameObject.layer;
 
             projectile.UpdateProperties(speedOffset, overrideSpeed, overrideLifetimer);
         }
