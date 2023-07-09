@@ -13,7 +13,6 @@ namespace Assets.Scripts.Cells
         #region Properties
 
         public Player ControllingPlayer;
-        public bool IsControlled => ControllingPlayer != null;
 
         bool suspended = false;
 
@@ -37,11 +36,11 @@ namespace Assets.Scripts.Cells
 
         public Action<float, float> OnHealthChange;
 
-        public float Speed => IsControlled
+        public float Speed => IsPlayer
             ? BaseSpeed
             : 1f + (BaseSpeed * (_currentHealth / totalHealth));
         public float BaseSpeed = 3f;
-        public float RotationSpeed => IsControlled
+        public float RotationSpeed => IsPlayer
             ? BaseRotationSpeed
             : 1f + (BaseRotationSpeed * (_currentHealth / totalHealth));
         private float BaseRotationSpeed = 15f;
@@ -72,7 +71,7 @@ namespace Assets.Scripts.Cells
         [SerializeField] float minDistanceFromEnemies = 2f;
         [SerializeField] float maxDistanceFromEnemies = 6f;
 
-        public bool IsPlayer { get => ControllingPlayer != null; }
+        public bool IsPlayer => ControllingPlayer != null;
 
         #endregion
 
@@ -92,6 +91,7 @@ namespace Assets.Scripts.Cells
             this.EnsureHasReference(ref _rigidbody);
             SetHealth(totalHealth);
             _rigidbody.drag = 5f;
+            _rigidbody.angularDrag = 5f;
 
             // Runs forever
             var weakSpotTween = LeanTween.value(gameObject, (alpha) =>
@@ -165,6 +165,12 @@ namespace Assets.Scripts.Cells
                 SetHealth(_currentHealth - damage);
             else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
                 SetHealth(_currentHealth - damage * 2);
+
+            if (!IsPlayer && _currentHealth <= 0f)
+            {
+                SetAlpha(0.35f);
+                suspended = true;
+            }
         }
 
         public void SetHealth(float newHealth, float? totalHealth = null)
@@ -182,12 +188,14 @@ namespace Assets.Scripts.Cells
             LTDescr descr = LeanTween.value(gameObject, SetAlpha, 1f, 0f, INVINCIBILITY_TWEEN_TIMING);
             descr.setLoopPingPong(INVINCIBILITY_TWEEN_PINGPONGS);
 
-            void SetAlpha(float alpha)
-            {
-                Color color = _sprite.color;
-                color.a = alpha;
-                _sprite.color = color;
-            }
+
+        }
+
+        void SetAlpha(float alpha)
+        {
+            Color color = _sprite.color;
+            color.a = alpha;
+            _sprite.color = color;
         }
 
         public void Dash()
