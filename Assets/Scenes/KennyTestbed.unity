@@ -123,18 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &148421375 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-    type: 3}
-  m_PrefabInstance: {fileID: 1363077404}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b38b9f0863ca5a342b781f41d59f8348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &148421376 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2599373319797223141, guid: 088e2e674e2424799ac8c33d34387050,
@@ -158,6 +146,7 @@ GameObject:
   - component: {fileID: 839703070}
   - component: {fileID: 839703069}
   - component: {fileID: 839703068}
+  - component: {fileID: 839703071}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,7 +196,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -239,6 +228,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839703071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839703067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &979108849
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,102 +531,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1058149215611639639, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 839703069}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].InputActionReference
-      value: 
-      objectReference: {fileID: -9161248474364625117, guid: fcd97719b04f16e41b4362eb47450bc9,
-        type: 3}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: Events.Events.Array.data[3].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1414646917}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 148421376}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 148421375}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AcceptDash
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SwitchActionMap
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Player, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlayerInputConsumer, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2057973098706683961, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: Events.Events.Array.data[4].Callbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 6232471431340985107, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
       propertyPath: m_RootOrder
@@ -648,11 +590,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6461206602952220126, guid: 088e2e674e2424799ac8c33d34387050,
-        type: 3}
-      propertyPath: DashForce
-      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9145220957328871123, guid: 088e2e674e2424799ac8c33d34387050,
         type: 3}
