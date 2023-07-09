@@ -123,6 +123,8 @@ public class Player : MonoBehaviour
         _controlledCell = newCell;
         _controlledCell.BaseSpeed = _playerCell.BaseSpeed;
         _controlledCell.ControllingPlayer = this;
+        _controlledCell.gameObject.layer = LayerMask.NameToLayer("Player");
+        _controlledCell.SetHealth(100);
         OnCellSwap?.Invoke(_controlledCell);
     }
 

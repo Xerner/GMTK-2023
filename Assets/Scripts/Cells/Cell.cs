@@ -149,8 +149,11 @@ namespace Assets.Scripts.Cells
             }
 
             // Uh oh, stinky
-            if (collision.gameObject.TryGetComponent<Projectile>(out var projectile))
-                TakeDamage(projectile.BulletStrength);
+            if (collision.gameObject.layer != gameObject.layer)
+            {
+                if (collision.gameObject.TryGetComponent<Projectile>(out var projectile))
+                    TakeDamage(projectile.BulletStrength);
+            }
         }
 
         #endregion
