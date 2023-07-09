@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.Extensions;
 using UnityEngine;
 
@@ -26,7 +28,7 @@ namespace Assets.Scripts.Cells
         [SerializeField] float _dashCooldown = 2f;
         float _currentDashCooldown = 0f;
         public Action<float, float> OnDashCooldownChange;
-        protected float ShootInterval = 0.3f;
+        protected float ShootInterval = 0.5f;
         private float _lastShootTime = 0;
 
         void Awake()
@@ -34,14 +36,14 @@ namespace Assets.Scripts.Cells
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
             SetHealth(_health);
-            _rigidbody.drag = 7f;
+            _rigidbody.drag = 5f;
         }
 
         void FixedUpdate()
         {
             if (ControllingPlayer == null)
             {
-                EnemyUpdate();
+                enemyUpdate();
             }
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
@@ -76,11 +78,6 @@ namespace Assets.Scripts.Cells
 
         public void Move(Vector2 moveVector)
         {
-            // Speed check to prevent cell from moving faster than intented
-            // if (direction.magnitude > 1)
-            // {
-            //     direction.Normalize();
-            // }
             var movementDelta = moveVector * Speed;
             _rigidbody.AddForce(movementDelta);
         }
@@ -90,23 +87,16 @@ namespace Assets.Scripts.Cells
             _attack?.UseAttack((Vector2)transform.up);
         }
 
-        public void EnemyUpdate()
+        private void enemyUpdate()
         {
             var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
             // Maintain a min/max distance threshold from player
-            var delta = playerLoc - transform.position;
-            if (delta.magnitude > 8)
+            maintainDistanceRangeFrom(playerLoc, 4f, 8f);
+
+            foreach (var cell in getOtherCells())
             {
-                Move(delta.normalized);
-            }
-            else if (delta.magnitude < 4)
-            {
-                Move(-delta.normalized);
-            }
-            else
-            {
-                Move(Vector2.zero);
+                maintainDistanceRangeFrom(cell.transform.position, 2f, 6f);
             }
 
             FaceToward(playerLoc);
@@ -116,6 +106,30 @@ namespace Assets.Scripts.Cells
                 Shoot();
                 _lastShootTime = Time.time;
             }
+        }
+
+        private void maintainDistanceRangeFrom(Vector3 pos, float min, float max)
+        {
+            var delta = pos - transform.position;
+            if (delta.magnitude > max)
+            {
+                Move(delta.normalized);
+            }
+            else if (delta.magnitude < min)
+            {
+                Move(-delta.normalized);
+            }
+            else
+            {
+                Move(Vector2.zero);
+            }
+        }
+
+        private IEnumerable<Cell> getOtherCells()
+        {
+            // Note that we use GetType() instead of Cell because we want the current subclass
+            // if there is one.
+            return FindObjectsOfType(GetType()).Where(cell => cell != this).Cast<Cell>();
         }
     }
 }
