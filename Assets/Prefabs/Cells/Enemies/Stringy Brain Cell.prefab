@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: 8750676881874488107, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: _overrideProjectileLifetime
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
