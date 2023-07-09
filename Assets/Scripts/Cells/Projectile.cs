@@ -13,7 +13,7 @@ namespace Assets.Scripts.Cells
 
         public float BulletStrength = 10f;
         public float RemainingLifeTime { get; private set; } = 5f;
-        
+
         [SerializeField]
         private float _speed = 4f;
 
@@ -39,7 +39,7 @@ namespace Assets.Scripts.Cells
             // Speed offset added to bullet speeds when player is moving in same direction as shooting direction
             LaunchSpeedOffset = playerSpeedOffset;
 
-            if (remainingLifetime.HasValue) 
+            if (remainingLifetime.HasValue)
             {
                 RemainingLifeTime = remainingLifetime.Value;
             }
@@ -52,6 +52,10 @@ namespace Assets.Scripts.Cells
         }
 
         private void SetRbVelocity() => _rigidbody.velocity = transform.up * (LaunchSpeedOffset + _speed);
-        
+
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            Destroy(gameObject);
+        }
     }
 }
