@@ -17,6 +17,7 @@ MonoBehaviour:
   OnValueChange:
     m_PersistentCalls:
       m_Calls: []
+  valueIndex: 3
   choices:
   - DisplayText: Slow
     Value: 0.05
