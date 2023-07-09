@@ -610,6 +610,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 152530767317835356, guid: b0944340dd1a51848a28954b939d208b,
+        type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 3487799375134581112, guid: b0944340dd1a51848a28954b939d208b,
         type: 3}
       propertyPath: m_Name
@@ -668,6 +673,16 @@ PrefabInstance:
     - target: {fileID: 6908871373745943837, guid: b0944340dd1a51848a28954b939d208b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684473074471652106, guid: b0944340dd1a51848a28954b939d208b,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684473074471652106, guid: b0944340dd1a51848a28954b939d208b,
+        type: 3}
+      propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

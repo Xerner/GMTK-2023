@@ -11,6 +11,7 @@ namespace Assets.Scripts.Cells
     public class Cell : MonoBehaviour, IPuppet
     {
         public Player ControllingPlayer;
+        public bool IsControlled => ControllingPlayer != null;
 
         [SerializeField]
         protected Attack _attack;
@@ -18,11 +19,19 @@ namespace Assets.Scripts.Cells
         [SerializeField]
         protected Rigidbody2D _rigidbody;
 
-        [SerializeField] float _health = 100f;
-        float _currentHealth = 100f;
+        [SerializeField] float _currentHealth;
+        [SerializeField] float StartingHealth = 100f;
+
         public Action<float, float> OnHealthChange;
 
-        public float Speed = 3f;
+        public float Speed => IsControlled
+            ? BaseSpeed
+            : 1f + (BaseSpeed * (_currentHealth / StartingHealth));
+        public float BaseSpeed = 3f;
+        public float RotationSpeed => IsControlled
+            ? BaseRotationSpeed
+            : 1f + (BaseRotationSpeed * (_currentHealth / StartingHealth));
+        private float BaseRotationSpeed = 15f;
         public float DashForce = 1000f;
         public float DashSpeedTime = 1f;
         [SerializeField] float _dashCooldown = 2f;
@@ -35,7 +44,7 @@ namespace Assets.Scripts.Cells
         {
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
-            SetHealth(_health);
+            SetHealth(StartingHealth);
             _rigidbody.drag = 5f;
         }
 
@@ -64,10 +73,10 @@ namespace Assets.Scripts.Cells
         public void SetHealth(float newHealth, float? totalHealth = null)
         {
             if (totalHealth != null)
-                _health = totalHealth.Value;
+                _currentHealth = totalHealth.Value;
 
             _currentHealth = newHealth;
-            OnHealthChange?.Invoke(_health, _currentHealth);
+            OnHealthChange?.Invoke(_currentHealth, _currentHealth);
         }
 
         public void Dash()
@@ -82,11 +91,13 @@ namespace Assets.Scripts.Cells
 
         public float FaceToward(Vector2 pointToFace)
         {
-            var angle = Vector2.SignedAngle(Vector2.up, pointToFace - (Vector2)transform.position);
-            _rigidbody.MoveRotation(angle);
-            //Debug.Log(angle);
+            var desiredFacing = (pointToFace - (Vector2)transform.position);
+            var desiredRot = Quaternion.LookRotation(forward: desiredFacing, upwards: Vector3.back);
+            var curRot = Quaternion.Euler(0, 0, _rigidbody.rotation);
+            var limited = Quaternion.RotateTowards(curRot, desiredRot, RotationSpeed);
+            _rigidbody.MoveRotation(limited);
 
-            return angle;
+            return 0; // Quaternion.Angle(transform.rotation, desiredRot);
         }
 
         public void Move(Vector2 moveVector)

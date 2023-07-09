@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     private Cell _playerCell;
 
     public Cell ControlledCell { get; private set; }
-    public Action<Cell> OnCellSwap;  
+    public Action<Cell> OnCellSwap;
 
     public Vector3 GetPosition() => _controlledCell.transform.position;
 
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         }
 
         // For snappier movement, the player has a high speed with high drag
-        _playerCell.Speed = 60f;
+        _playerCell.BaseSpeed = 60f;
         _playerCell.GetComponent<Rigidbody2D>().drag = 10f;
     }
 
