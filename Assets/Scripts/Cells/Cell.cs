@@ -157,6 +157,10 @@ namespace Assets.Scripts.Cells
 
         public void TakeoverCell(Cell cellToTakeover)
         {
+            totalHealth = 100f;
+            _currentHealth = 100f;
+            SetHealth(totalHealth);
+            cellToTakeover.SetHealth(100f, 100f);
             audioController.PlayRandom(audioController.invadeAudio);
             ControllingPlayer.SwapControl(cellToTakeover);
         }
