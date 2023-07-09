@@ -13,6 +13,8 @@ namespace Assets.Scripts.Cells
         #region Properties
 
         public Player ControllingPlayer;
+        public SFXController audioController;
+
         public bool IsControlled => ControllingPlayer != null;
 
         bool suspended = false;
@@ -126,6 +128,7 @@ namespace Assets.Scripts.Cells
 
         public void TakeoverCell(Cell cellToTakeover)
         {
+            audioController.PlayRandom(audioController.invadeAudio);
             ControllingPlayer.SwapControl(cellToTakeover);
         }
 
@@ -140,9 +143,10 @@ namespace Assets.Scripts.Cells
                 {
                     // not so stinky
                     return;
-                } 
+                }
             }
 
+            audioController.PlayRandom(audioController.hitAudio);
             if (LayerMask.LayerToName(gameObject.layer) == "Player")
                 SetHealth(_currentHealth - damage);
             else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
@@ -180,6 +184,7 @@ namespace Assets.Scripts.Cells
                 _currentDashCooldown = _dashCooldown;
                 Vector2 dashForce = transform.up * DashForce;
                 _rigidbody.AddForce(dashForce);
+                audioController.PlayRandom(audioController.dashAudio);
             }
         }
 
@@ -205,6 +210,9 @@ namespace Assets.Scripts.Cells
         {
             if (suspended) return;
             _attack?.UseAttack((Vector2)transform.up);
+            if (IsPlayer) {
+                audioController.PlayRandom(audioController.shootAudio);
+            }
         }
 
         private void enemyUpdate()
