@@ -5,6 +5,7 @@ using System.Linq;
 using Assets.Scripts.Extensions;
 using UnityEngine;
 
+
 namespace Assets.Scripts.Cells
 {
     [RequireComponent(typeof(Rigidbody2D))]
@@ -115,9 +116,13 @@ namespace Assets.Scripts.Cells
                 playerUpdate();
             }
 
+            var finalAlpha = spriteAlpha * spriteFlashAlpha * (suspended ? 0.35f : 1f);
             var color = _sprite.color;
-            color.a = spriteAlpha * spriteFlashAlpha * (suspended ? 0.35f : 1f);
+            color.a = finalAlpha;
             _sprite.color = color;
+            var light = GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>();
+            if (light != null)
+                light.intensity = finalAlpha;
 
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
