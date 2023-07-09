@@ -232,14 +232,22 @@ namespace Assets.Scripts.Cells
         {
             if (suspended) return;
             _attack?.UseAttack((Vector2)transform.up);
-            if (IsPlayer) {
+            if (IsPlayer)
+            {
                 audioController.PlayRandom(audioController.shootAudio);
             }
         }
 
         private void enemyUpdate()
         {
+            if (_weakSpot != null)
+            {
+                Color wsColor = _weakSpot.color;
+                wsColor.a = weakSpotAlpha * (1 - (_currentHealth / totalHealth));
+                _weakSpot.color = wsColor;
+            }
             if (suspended) return;
+
             var playerLoc = Player.Instance.GetPosition();
             // Maintain a min/max distance threshold from player
             maintainDistanceRangeFrom(playerLoc, minDistanceFromPlayer, maxDistanceFromPlayer);
@@ -255,13 +263,6 @@ namespace Assets.Scripts.Cells
             {
                 Shoot();
                 _lastShootTime = Time.time;
-            }
-
-            if (_weakSpot != null)
-            {
-                Color wsColor = _weakSpot.color;
-                wsColor.a = weakSpotAlpha * (1 - (_currentHealth / totalHealth));
-                _weakSpot.color = wsColor;
             }
         }
 
