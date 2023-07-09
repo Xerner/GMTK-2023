@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2187849762049344989}
   - component: {fileID: -28503555815240667}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Circle Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6777395665268390530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1291, y: 0.1515, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,9 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224,
-    type: 3}
-  m_Color: {r: 1, g: 0.58040833, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 9e139e3ea9e5c144cb02806474f2d5b7, type: 3}
+  m_Color: {r: 0.2396226, g: 0.596023, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2383389161807525433}
-  BulletStrength: 10
+  BulletStrength: 15
+  _speed: 1
 --- !u!60 &-28503555815240667
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5

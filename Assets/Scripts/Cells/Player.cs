@@ -72,7 +72,8 @@ public class Player : MonoBehaviour
         }
         else if (context.canceled)
         {
-            StopCoroutine(shootOnDelayEnumerator);
+            if (shootOnDelayEnumerator != null)
+                StopCoroutine(shootOnDelayEnumerator);
         }
     }
 

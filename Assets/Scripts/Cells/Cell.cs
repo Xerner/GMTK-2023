@@ -10,41 +10,59 @@ namespace Assets.Scripts.Cells
     [RequireComponent(typeof(Rigidbody2D))]
     public class Cell : MonoBehaviour, IPuppet
     {
+        #region Properties
+
         public Player ControllingPlayer;
         public bool IsControlled => ControllingPlayer != null;
 
         [SerializeField]
-        protected Attack _attack;
-
-        [SerializeField]
         protected Rigidbody2D _rigidbody;
 
+        [Header("Base Stats")]
         [SerializeField] float _currentHealth;
-        [SerializeField] float StartingHealth = 100f;
+        [SerializeField] float totalHealth = 100f;
 
         public Action<float, float> OnHealthChange;
 
         public float Speed => IsControlled
             ? BaseSpeed
-            : 1f + (BaseSpeed * (_currentHealth / StartingHealth));
+            : 1f + (BaseSpeed * (_currentHealth / totalHealth));
         public float BaseSpeed = 3f;
         public float RotationSpeed => IsControlled
             ? BaseRotationSpeed
-            : 1f + (BaseRotationSpeed * (_currentHealth / StartingHealth));
+            : 1f + (BaseRotationSpeed * (_currentHealth / totalHealth));
         private float BaseRotationSpeed = 15f;
+        
+        [Header("Attacks")]
+        [SerializeField]
+        protected Attack _attack;
+        [SerializeField]
+        [Description("Attacks per second")]
+        protected float ShootInterval = 0.5f;
+        private float _lastShootTime = 0;
+
+        [Header("Dash")]
         public float DashForce = 1000f;
         public float DashSpeedTime = 1f;
         [SerializeField] float _dashCooldown = 2f;
         float _currentDashCooldown = 0f;
         public Action<float, float> OnDashCooldownChange;
-        protected float ShootInterval = 0.5f;
-        private float _lastShootTime = 0;
+
+        [Header("Enemy Stats")]
+        [SerializeField] float minDistanceFromPlayer = 4f;
+        [SerializeField] float maxDistanceFromPlayer = 8f;
+        [SerializeField] float minDistanceFromEnemies = 2f;
+        [SerializeField] float maxDistanceFromEnemies = 6f;
+
+        #endregion
+
+        #region Unity Methods
 
         void Awake()
         {
             this.EnsureHasReference(ref _attack);
             this.EnsureHasReference(ref _rigidbody);
-            SetHealth(StartingHealth);
+            SetHealth(totalHealth);
             _rigidbody.drag = 5f;
         }
 
@@ -70,13 +88,15 @@ namespace Assets.Scripts.Cells
             }
         }
 
+        #endregion
+
         public void SetHealth(float newHealth, float? totalHealth = null)
         {
             if (totalHealth != null)
-                _currentHealth = totalHealth.Value;
+                this.totalHealth = totalHealth.Value;
 
             _currentHealth = newHealth;
-            OnHealthChange?.Invoke(_currentHealth, _currentHealth);
+            OnHealthChange?.Invoke(_currentHealth, this.totalHealth);
         }
 
         public void Dash()
@@ -116,11 +136,11 @@ namespace Assets.Scripts.Cells
             var playerLoc = Player.Instance.GetPosition();
             // Currently assumes player is ~1 unit in size
             // Maintain a min/max distance threshold from player
-            maintainDistanceRangeFrom(playerLoc, 4f, 8f);
+            maintainDistanceRangeFrom(playerLoc, minDistanceFromPlayer, maxDistanceFromPlayer);
 
             foreach (var cell in getOtherCells())
             {
-                maintainDistanceRangeFrom(cell.transform.position, 2f, 6f);
+                maintainDistanceRangeFrom(cell.transform.position, minDistanceFromEnemies, maxDistanceFromEnemies);
             }
 
             FaceToward(playerLoc);

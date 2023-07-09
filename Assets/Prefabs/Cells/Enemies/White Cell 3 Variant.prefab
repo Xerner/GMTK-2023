@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3617736967424768590
+--- !u!1001 &637162956765882580
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.26
+      value: 3.38
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.26
+      value: -2.97
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
@@ -66,13 +66,18 @@ PrefabInstance:
     - target: {fileID: 4807889144283560315, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_Name
-      value: White Cell 2 Variant
+      value: White Cell 3 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449207377739481298, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: BaseSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8075944941402725410, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1800307342, guid: ebd098b3247f22e4fa4f97b022a1b856,
+      objectReference: {fileID: 1293519955, guid: ebd098b3247f22e4fa4f97b022a1b856,
         type: 3}
     - target: {fileID: 8075944941402725410, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}

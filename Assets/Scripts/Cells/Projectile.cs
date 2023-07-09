@@ -13,7 +13,11 @@ namespace Assets.Scripts.Cells
 
         public float BulletStrength = 10f;
         public float RemainingLifeTime { get; private set; } = 5f;
-        public float Speed { get; private set; } = 4f;
+        
+        [SerializeField]
+        private float _speed = 4f;
+
+        public float Speed { get => _speed; }
 
         void Start()
         {
@@ -42,12 +46,12 @@ namespace Assets.Scripts.Cells
 
             if (speed.HasValue)
             {
-                Speed = speed.Value;
+                _speed = speed.Value;
                 SetRbVelocity();
             }
         }
 
-        private void SetRbVelocity() => _rigidbody.velocity = transform.up * (LaunchSpeedOffset + Speed);
+        private void SetRbVelocity() => _rigidbody.velocity = transform.up * (LaunchSpeedOffset + _speed);
         
     }
 }

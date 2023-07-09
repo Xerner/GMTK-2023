@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &637162956765882580
+--- !u!1001 &631592123346045234
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.49
+      value: 3.94
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.93
+      value: -0.78
       objectReference: {fileID: 0}
     - target: {fileID: 2251129769544566822, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
@@ -66,13 +66,28 @@ PrefabInstance:
     - target: {fileID: 4807889144283560315, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_Name
-      value: White Cell 3 Variant
+      value: Stringy Brain Cell
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449207377739481298, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: BaseSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449207377739481298, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: maxDistanceFromPlayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5449207377739481298, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: minDistanceFromPlayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8075944941402725410, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1293519955, guid: ebd098b3247f22e4fa4f97b022a1b856,
+      objectReference: {fileID: 1703037650, guid: ebd098b3247f22e4fa4f97b022a1b856,
         type: 3}
     - target: {fileID: 8075944941402725410, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
@@ -92,7 +107,12 @@ PrefabInstance:
     - target: {fileID: 8750676881874488107, guid: b8715fff9feda4f74bd74d22b3645f97,
         type: 3}
       propertyPath: _pattern
-      value: 4
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8750676881874488107, guid: b8715fff9feda4f74bd74d22b3645f97,
+        type: 3}
+      propertyPath: _overrideProjectileLifetime
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
