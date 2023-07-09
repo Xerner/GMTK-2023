@@ -9,6 +9,7 @@ public class GameUI : MonoBehaviour
 {
     public Slider PlayerHealth;
     public Image DashCooldownImage;
+    public Image DashChargedImage;
 
     void OnValidate()
     {
@@ -48,6 +49,19 @@ public class GameUI : MonoBehaviour
     [Command("update-dash")]
     void UpdateDashCooldown(float cooldown, float currentCooldown)
     {
+        if (currentCooldown <= 0 && DashChargedImage.color.a == 0f)
+        {
+            Color color = DashChargedImage.color;
+            color.a = 1f;
+            DashChargedImage.color = color;
+        }
+        else if (currentCooldown > 0 && DashChargedImage.color.a != 0f)
+        {
+            Color color = DashChargedImage.color;
+            color.a = 0f;
+            DashChargedImage.color = color;
+        }
+        
         DashCooldownImage.fillAmount = Mathf.Clamp((cooldown - currentCooldown) / cooldown, 0f, 1f);
     }
 }
