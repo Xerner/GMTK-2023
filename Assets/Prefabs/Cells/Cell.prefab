@@ -242,7 +242,7 @@ MonoBehaviour:
   _attack: {fileID: 8750676881874488107}
   _rigidbody: {fileID: 4360441159806015926}
   _health: 100
-  Speed: 25
+  Speed: 30
   DashForce: 1000
   DashSpeedTime: 1
   _dashCooldown: 2

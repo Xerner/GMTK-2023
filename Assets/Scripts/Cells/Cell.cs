@@ -23,6 +23,7 @@ namespace Assets.Scripts.Cells
         public Action<float, float> OnHealthChange;
 
         public float Speed = 3f;
+        private float RotationSpeed = 5f;
         public float DashForce = 1000f;
         public float DashSpeedTime = 1f;
         [SerializeField] float _dashCooldown = 2f;
@@ -81,11 +82,13 @@ namespace Assets.Scripts.Cells
 
         public float FaceToward(Vector2 pointToFace)
         {
-            var angle = Vector2.SignedAngle(Vector2.up, pointToFace - (Vector2)transform.position);
-            _rigidbody.MoveRotation(angle);
-            //Debug.Log(angle);
+            var desiredFacing = (pointToFace - (Vector2)transform.position);
+            var desiredRot = Quaternion.LookRotation(forward: desiredFacing, upwards: Vector3.back);
+            var curRot = Quaternion.Euler(0, 0, _rigidbody.rotation);
+            var limited = Quaternion.RotateTowards(curRot, desiredRot, RotationSpeed);
+            _rigidbody.MoveRotation(limited);
 
-            return angle;
+            return 0; // Quaternion.Angle(transform.rotation, desiredRot);
         }
 
         public void Move(Vector2 moveVector)
