@@ -11,6 +11,7 @@ namespace Assets.Scripts.Cells
 
         private float LaunchSpeedOffset = 0f;
 
+        public float BulletStrength = 10f;
         public float RemainingLifeTime { get; private set; } = 5f;
         public float Speed { get; private set; } = 4f;
 

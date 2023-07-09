@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2383389161807525433}
+  BulletStrength: 10
 --- !u!60 &-28503555815240667
 PolygonCollider2D:
   m_ObjectHideFlags: 0

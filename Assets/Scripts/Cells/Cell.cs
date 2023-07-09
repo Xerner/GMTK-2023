@@ -50,13 +50,14 @@ namespace Assets.Scripts.Cells
         }
         public void OnTriggerEnter2D(Collider2D collision)
         {
+            var damage = collision.gameObject.GetComponent<Projectile>().BulletStrength;
             if (LayerMask.LayerToName(gameObject.layer) == "Player")
             {
-                Debug.Log("player hit");
+                SetHealth(_currentHealth - damage);
             }
             else if (LayerMask.LayerToName(gameObject.layer) == "Enemy")
             {
-                Debug.Log("enemy hit");
+                SetHealth(_currentHealth - damage*2);
             }
         }
 
