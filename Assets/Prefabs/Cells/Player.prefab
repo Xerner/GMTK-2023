@@ -367,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllingPlayer: {fileID: 0}
+  audioController: {fileID: 0}
   _rigidbody: {fileID: 2147220674680990847}
   _sprite: {fileID: 6707571172637874082}
   _weakSpot: {fileID: 0}
@@ -429,7 +430,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -444,9 +445,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.32, y: 1.1}
+      - {x: 0, y: 1.35}
+      - {x: -0.32, y: 1.1}
+      - {x: -0.76, y: -0.78}
+      - {x: 0.84, y: -0.78}
   m_UseDelaunayMesh: 0
 --- !u!1 &5422604238283565615
 GameObject:
