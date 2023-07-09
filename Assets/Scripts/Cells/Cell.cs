@@ -21,6 +21,9 @@ namespace Assets.Scripts.Cells
         protected Rigidbody2D _rigidbody;
         [SerializeField]
         protected SpriteRenderer _sprite;
+        [SerializeField]
+        protected SpriteRenderer _weakSpot;
+        private float weakSpotAlpha = 0f;
 
         [Header("Base Stats")]
         [SerializeField] float _currentHealth;
@@ -89,6 +92,13 @@ namespace Assets.Scripts.Cells
             this.EnsureHasReference(ref _rigidbody);
             SetHealth(totalHealth);
             _rigidbody.drag = 5f;
+
+            // Runs forever
+            var weakSpotTween = LeanTween.value(gameObject, (alpha) =>
+            {
+                weakSpotAlpha = alpha;
+            }, 0f, 1f, 0.5f);
+            weakSpotTween.setLoopPingPong();
         }
 
         void FixedUpdate()
@@ -96,6 +106,10 @@ namespace Assets.Scripts.Cells
             if (ControllingPlayer == null)
             {
                 enemyUpdate();
+            }
+            else
+            {
+                playerUpdate();
             }
             _currentDashCooldown = Mathf.Clamp(_currentDashCooldown - Time.deltaTime, 0f, _dashCooldown);
             OnDashCooldownChange?.Invoke(_dashCooldown, _currentDashCooldown);
@@ -215,7 +229,6 @@ namespace Assets.Scripts.Cells
         {
             if (suspended) return;
             var playerLoc = Player.Instance.GetPosition();
-            // Currently assumes player is ~1 unit in size
             // Maintain a min/max distance threshold from player
             maintainDistanceRangeFrom(playerLoc, minDistanceFromPlayer, maxDistanceFromPlayer);
 
@@ -230,6 +243,23 @@ namespace Assets.Scripts.Cells
             {
                 Shoot();
                 _lastShootTime = Time.time;
+            }
+
+            if (_weakSpot != null)
+            {
+                Color wsColor = _weakSpot.color;
+                wsColor.a = weakSpotAlpha * (1 - (_currentHealth / totalHealth));
+                _weakSpot.color = wsColor;
+            }
+        }
+
+        private void playerUpdate()
+        {
+            if (_weakSpot != null)
+            {
+                Color wsColor = _weakSpot.color;
+                wsColor.a = 0;
+                _weakSpot.color = wsColor;
             }
         }
 
