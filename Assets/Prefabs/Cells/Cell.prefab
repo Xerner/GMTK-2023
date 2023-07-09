@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4360441159806015926}
   - component: {fileID: 5449207377739481298}
   - component: {fileID: 8750676881874488107}
-  m_Layer: 0
+  - component: {fileID: 3603605498478368968}
+  m_Layer: 7
   m_Name: Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8075944941402725410
 SpriteRenderer:
@@ -130,7 +131,11 @@ MonoBehaviour:
   ControllingPlayer: {fileID: 0}
   _attack: {fileID: 8750676881874488107}
   _rigidbody: {fileID: 4360441159806015926}
+  _health: 100
   Speed: 25
+  DashForce: 1000
+  DashSpeedTime: 1
+  _dashCooldown: 2
 --- !u!114 &8750676881874488107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,3 +151,38 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 6777395665268390530, guid: f86259f9e954046b59b18dc1952ab0d9,
     type: 3}
   _pattern: 0
+--- !u!58 &3603605498478368968
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807889144283560315}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.52
